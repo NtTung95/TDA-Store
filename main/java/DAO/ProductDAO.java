@@ -12,7 +12,7 @@ public class ProductDAO {
         ArrayList<Product> productsList = new ArrayList<>();
 
         try {
-            conn = com.william.ConnectDB.connectionDB();
+            conn = ConnectDB.connectionDB();
             String query = "select * from product";
             Statement stmt = null;
             try {
@@ -70,7 +70,7 @@ public class ProductDAO {
         ArrayList<Category> categoryList = new ArrayList<>();
 
         try {
-            conn = com.william.ConnectDB.connectionDB();
+            conn = DAO.ConnectDB.connectionDB();
             String query = "select * from category";
             Statement stmt = null;
             try {
@@ -114,7 +114,7 @@ public class ProductDAO {
         Connection conn = null;
         boolean isValid = false;
         try {
-            conn = com.william.ConnectDB.connectionDB();
+            conn = DAO.ConnectDB.connectionDB();
             String query = "UPDATE product SET categoryId = ?, quantity= ?, price = ?, description = ?, productName = ?, imgMain = ?,img1 = ?,img2 = ?,img3=?,img4=?,Size_S = ?, Size_M=?, Size_L= ?, Size_XL = ?, Size_XXL=? WHERE productId = ?;";
             Statement stmt = null;
             try {

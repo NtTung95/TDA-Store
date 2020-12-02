@@ -43,6 +43,9 @@
         .imgPreviewTable:hover{
             transform: scale(3.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
+        .submmitButton{
+            float: right;
+        }
     </style>
 
 </head>
@@ -313,7 +316,9 @@
                                     <input type="text"  name="SizeXXLProduct" class="form-control" value="${product.getSize_XXL()}">
                                 </div>
                                 <input type="text" name="action" value="update" style="display: none">
-                                <input type="button" onclick="submitForm${product.getProductId()}()" class="btn btn-primary">
+                                <div class="submmitButton col-sm-2">
+                                    <input type="button" onclick="submitForm${product.getProductId()}()" class="btn btn-primary" value="Update">
+                                </div>
                             </form>
                         </div>
 <%--                        <!-- Modal footer -->--%>
