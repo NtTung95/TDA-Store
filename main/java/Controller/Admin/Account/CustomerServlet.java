@@ -69,7 +69,7 @@ public class CustomerServlet extends HttpServlet {
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -132,7 +132,7 @@ public class CustomerServlet extends HttpServlet {
 
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
