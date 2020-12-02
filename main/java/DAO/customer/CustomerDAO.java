@@ -3,6 +3,7 @@ package DAO.customer;
 
 import DAO.ConnectDB;
 import Model.Customer;
+import Model.TypeAccount;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -161,6 +162,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
             }
         }
     }
+
     public static Customer getInfoLogin(String usernameCheck, String passwordCheck){
         Connection conn = null;
         Customer customer = new Customer();
@@ -186,12 +188,6 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                     customer.setPhoneNumber(rs.getString("phoneNumber"));
                     customer.setTypeAccountId(rs.getInt("typeAccountID"));
                 }
-
-
-//                while (rs.next()) {
-//                    String name = rs.getString("username");
-//                    System.out.println(name);
-//                }
             } catch (SQLException e ) {
                 throw new Error("Problem", e);
             } finally {
@@ -210,4 +206,23 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
         }
         return customer;
     }
+
+    public List<TypeAccount> getTypeAccount() {
+        List<TypeAccount> typeAccounts = new ArrayList<>();
+        try (Connection connection = ConnectDB.connectionDB();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from typeofaccount;")) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int typeAccountId = rs.getInt("typeAccountId");
+                String typeAccount = rs.getString("typeOfAccount");
+
+                typeAccounts.add(new TypeAccount(typeAccountId,typeAccount));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return typeAccounts;
+    }
+
 }
