@@ -4,10 +4,7 @@ package DAO.customer;
 import DAO.ConnectDB;
 import Model.Customer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,5 +160,54 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                 }
             }
         }
+    }
+    public static Customer getInfoLogin(String usernameCheck, String passwordCheck){
+        Connection conn = null;
+        Customer customer = new Customer();
+        try {
+
+            conn = ConnectDB.connectionDB();
+            String query = "select * from customer where username = ? and password = ?";
+            Statement stmt = null;
+            try {
+                PreparedStatement pre = conn.prepareStatement(query);
+                pre.setString(1,usernameCheck);
+                pre.setString(2,passwordCheck);
+                ResultSet rs = pre.executeQuery();
+
+                if(rs.next()){
+                    customer.setUsername(rs.getString("username"));
+                    customer.setFirstname(rs.getString("firstName"));
+                    customer.setAddress(rs.getString("address"));
+                    customer.setBirthDay(rs.getString("birthDay"));
+                    customer.setCustomerID(Integer.parseInt(rs.getString("customerID")));
+                    customer.setSurname(rs.getString("surName"));
+                    customer.setPassword(rs.getString("password"));
+                    customer.setPhoneNumber(rs.getString("phoneNumber"));
+                    customer.setTypeAccountId(rs.getInt("typeAccountID"));
+                }
+
+
+//                while (rs.next()) {
+//                    String name = rs.getString("username");
+//                    System.out.println(name);
+//                }
+            } catch (SQLException e ) {
+                throw new Error("Problem", e);
+            } finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        } catch (SQLException e) {
+            throw new Error("Problem", e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return customer;
     }
 }

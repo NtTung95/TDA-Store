@@ -69,9 +69,9 @@
                         <a class="nav-link dropbtn">Sale</a>
                         <div class="dropdown-content ">
 
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
+                            <a href="#">Login</a>
+                            <a href="#">Register</a>
+<%--                            <a href="#">Link 3</a>--%>
                         </div>
                     </div>
                 </li>
@@ -94,19 +94,29 @@
                               d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                     </svg>
                 </a></li>
-
+<%
+String nameResult =(String) session.getAttribute("nameLogin");
+String styleMenuDrop = "none";
+if (nameResult == null){
+    nameResult = "Login";
+}else {
+    styleMenuDrop = "block";
+}
+%>
                 <li class="nav-item active">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn">
+                        <a class="nav-link dropbtn" href="/login">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open-fill"
                                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
                             </svg>
+                            <%=nameResult%>
                         </a>
-                        <div class="dropdown-content">
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
+
+                        <div class="dropdown-content" style="display: <%=styleMenuDrop%>">
+                            <a href="/login">Login</a>
+                            <a href="/register">Register</a>
                             <a href="#">Link 3</a>
 
                         </div>

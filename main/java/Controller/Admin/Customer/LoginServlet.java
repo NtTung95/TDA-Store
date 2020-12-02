@@ -1,7 +1,9 @@
 package Controller.Admin.Customer;
 
 import DAO.customer.CustomerDAO;
+import Model.Customer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +20,11 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         if(us.checkLogin(username,password)) {
-            request.getRequestDispatcher("/homepage.jsp").forward(request,response);
             HttpSession session = request.getSession();
+            Customer customer = CustomerDAO.getInfoLogin(username,password);
             session.setAttribute("nameLogin",username);
+            session.setAttribute("typeOfId",customer.getTypeAccountId());
+            request.getRequestDispatcher("index.jsp").forward(request,response);
         } else {
 //            response.sendRedirect("/login.jsp");
             request.getRequestDispatcher("login.jsp").forward(request,response);
