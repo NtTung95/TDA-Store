@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<link rel="stylesheet" href="styles.css">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
     <title>Home</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -23,19 +22,21 @@
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn" >Male</a>
+                        <a class="nav-link dropbtn">Male</a>
                         <div class="dropdown-content">
-                            <ul><li>
-                            <a href="#">T-shirt</a>
-                            <a href="#">Shirt</a>
-                            <a href="#">Coat</a>
-                            <a href="#">Shorts</a>
-                            <a href="#">Jeans</a>
-                            <a href="#">Pants</a>
-
-                            </li>
+                            <ul>
                                 <li>
-                                    <img src="image/male.jpg" style="height: 400px ;position:absolute;top: 0px;left: 450px">
+                                    <a href="#">T-shirt</a>
+                                    <a href="#">Shirt</a>
+                                    <a href="#">Coat</a>
+                                    <a href="#">Shorts</a>
+                                    <a href="#">Jeans</a>
+                                    <a href="#">Pants</a>
+
+                                </li>
+                                <li>
+                                    <img src="image/male.jpg"
+                                         style="height: 400px ;position:absolute;top: 0px;left: 450px">
                                 </li>
                             </ul>
                         </div>
@@ -43,19 +44,21 @@
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn" >Female</a>
-                        <div class="dropdown-content  " >
-                            <ul><li>
-                            <a href="#">T-shirt</a>
-                            <a href="#">Shirt</a>
-                            <a href="#">Coat</a>
-                            <a href="#">Dresses</a>
-                            <a href="#">Shorts</a>
-                            <a href="#">Jeans</a>
-                            <a href="#">Pants</a>
-                            </li>
+                        <a class="nav-link dropbtn">Female</a>
+                        <div class="dropdown-content  ">
+                            <ul>
                                 <li>
-                            <img src="image/female.jpg" style="height: 400px ;position:absolute;top: 0px;left: 500px">
+                                    <a href="#">T-shirt</a>
+                                    <a href="#">Shirt</a>
+                                    <a href="#">Coat</a>
+                                    <a href="#">Dresses</a>
+                                    <a href="#">Shorts</a>
+                                    <a href="#">Jeans</a>
+                                    <a href="#">Pants</a>
+                                </li>
+                                <li>
+                                    <img src="image/female.jpg"
+                                         style="height: 400px ;position:absolute;top: 0px;left: 500px">
                                 </li>
                             </ul>
                         </div>
@@ -63,7 +66,7 @@
                 </li>
                 <li class="nav-item">
                     <div class=" dropdown">
-                        <a class="nav-link dropbtn" >Sale</a>
+                        <a class="nav-link dropbtn">Sale</a>
                         <div class="dropdown-content ">
 
                             <a href="#">Link 1</a>
@@ -94,9 +97,13 @@
 
                 <li class="nav-item active">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn" ><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                        </svg></a>
+                        <a class="nav-link dropbtn">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                            </svg>
+                        </a>
                         <div class="dropdown-content">
                             <a href="#">Link 1</a>
                             <a href="#">Link 2</a>
@@ -105,7 +112,6 @@
                         </div>
                     </div>
                 </li>
-
 
 
             </ul>
@@ -136,7 +142,7 @@
 <footer class="page-footer font-small blue pt-4">
 
     <!-- Footer Links -->
-    <div class="container-fluid text-center text-md-left" style="background:#b8daff">
+    <div class="container-fluid text-center text-md-left">
 
         <div class="row">
 
@@ -222,7 +228,7 @@
                     </li>
                     <li>
                         <a href="#"> <img src="image/fb2.jfif" style="height: 50px"></a>
-                        <a href="#">  <img src="image/in.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/in.png" style="height: 50px"></a>
                         <a href="#"> <img src="image/tw.png" style="height: 50px"></a>
                     </li>
 
@@ -236,7 +242,6 @@
     </div>
 
 
-
     <!-- Footer Links -->
 
     <!-- Copyright -->
@@ -244,8 +249,6 @@
         <a href="#"> TDT.vn</a>
     </div>
 </footer>
-</body>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
