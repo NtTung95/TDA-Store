@@ -2,6 +2,7 @@ package Controller.Cart;
 
 import DAO.ProductDAO;
 import Model.Product;
+import Model.ProductCart;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "Cart", urlPatterns = "/cart")
 public class Cart extends HttpServlet {
-    public static ArrayList<Product> listProduct = new ArrayList<>();
+    public static ArrayList<ProductCart> listProductCart = new ArrayList<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -25,13 +26,16 @@ public class Cart extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setAttribute("listProductCart",listProductCart);
+request.getRequestDispatcher("cart.jsp").forward(request,response);
     }
 
     protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idProduct = request.getParameter("IdProduct");
-        System.out.println(idProduct);
-        Product product = ProductDAO.getProductDetail(idProduct);
-        listProduct.add(product);
+        int amoutSelect = Integer.parseInt(request.getParameter("amoutSelect"));
+        String sizeColor = request.getParameter("sizeSelect");
+            ProductCart productCart = ProductDAO.getProductDetailCart(idProduct,sizeColor,amoutSelect);
+        listProductCart.add(productCart);
+        response.sendRedirect("/cart");
     }
 }

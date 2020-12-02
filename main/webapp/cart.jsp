@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,15 +30,19 @@
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="nav-link dropbtn">Male</a>
-                        <div class="dropdown-content" style=" background: rgba(255, 255, 255, 0.57) !important">
+                        <div class="dropdown-content">
                             <ul>
                                 <li>
-                                    <a href="#">T-shirt</a>
-                                    <a href="#">Shirt</a>
-                                    <a href="#">Coat</a>
-                                    <a href="#">Shorts</a>
-                                    <a href="#">Jeans</a>
-                                    <a href="#">Pants</a>
+                                    <c:forEach items='${requestScope["categoryList"]}'
+                                               var="category">
+                                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                    </c:forEach>
+
+                                    <%--                                    <a href="#">Shirt</a>--%>
+                                    <%--                                    <a href="#">Coat</a>--%>
+                                    <%--                                    <a href="#">Shorts</a>--%>
+                                    <%--                                    <a href="#">Jeans</a>--%>
+                                    <%--                                    <a href="#">Pants</a>--%>
 
                                 </li>
                                 <li>
@@ -50,16 +56,20 @@
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="nav-link dropbtn">Female</a>
-                        <div class="dropdown-content" style=" background: rgba(255, 255, 255, 0.57) !important">
+                        <div class="dropdown-content  ">
                             <ul>
                                 <li>
-                                    <a href="#">T-shirt</a>
-                                    <a href="#">Shirt</a>
-                                    <a href="#">Coat</a>
-                                    <a href="#">Dresses</a>
-                                    <a href="#">Shorts</a>
-                                    <a href="#">Jeans</a>
-                                    <a href="#">Pants</a>
+                                    <c:forEach items='${requestScope["categoryList"]}'
+                                               var="category">
+                                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                    </c:forEach>
+                                    <%--                                    <a href="#">T-shirt</a>--%>
+                                    <%--                                    <a href="#">Shirt</a>--%>
+                                    <%--                                    <a href="#">Coat</a>--%>
+                                    <%--                                    <a href="#">Dresses</a>--%>
+                                    <%--                                    <a href="#">Shorts</a>--%>
+                                    <%--                                    <a href="#">Jeans</a>--%>
+                                    <%--                                    <a href="#">Pants</a>--%>
                                 </li>
                                 <li>
                                     <img src="image/female.jpg"
@@ -72,11 +82,11 @@
                 <li class="nav-item">
                     <div class=" dropdown">
                         <a class="nav-link dropbtn">Sale</a>
-                        <div class="dropdown-content" style=" background: rgba(255, 255, 255, 0.57) !important">
+                        <div class="dropdown-content" style="width: auto;height: auto">
 
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
+                            <a href="#">Login</a>
+                            <a href="#">Register</a>
+                            <%--                            <a href="#">Link 3</a>--%>
                         </div>
                     </div>
                 </li>
@@ -99,20 +109,38 @@
                               d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                     </svg>
                 </a></li>
-
+                <%
+                    String nameResult = (String) session.getAttribute("nameLogin");
+                    String url = "/login";
+                    String menu1 = "Login";
+                    String urlMenu1 = "/login";
+                    String menu2 = "Register";
+                    String urlMenu2 = "/register";
+                    if (nameResult == null) {
+                        nameResult = "Login";
+                    }else {
+                        url = "#";
+                        menu1 = "profile";
+                        urlMenu1="#";
+                        menu2="logout";
+                        urlMenu2= "/logout";
+                    }
+                %>
                 <li class="nav-item active">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn">
+                        <a class="nav-link dropbtn" href="<%=url%>">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-open-fill"
                                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                       d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
                             </svg>
+                            <%=nameResult%>
                         </a>
-                        <div class="dropdown-content" style=" background: rgba(255, 255, 255, 0.57) !important">
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
+
+                        <div class="dropdown-content" style="height: auto; width: auto">
+                            <a href="<%=urlMenu1%>"><%=menu1%></a>
+                            <a href="<%=urlMenu2%>"><%=menu2%></a>
+                            <%--                            <a href="#">Link 3</a>--%>
 
                         </div>
                     </div>
@@ -128,147 +156,80 @@
         <div class="card" style="width: 45rem; border: 1px solid white;margin-left: 320px">
             <div class="container-fluid text-center text-md-left" style="background:#b8daff">
 
-                <div class="row">
 
-                    <div class="col-md-4">
+                <c:forEach items='${requestScope["listProductCart"]}'
+                           var="productCart">
+                    <div class="row">
 
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#"><img src="image/female.jpg" style="height: 200px"></a>
+                        <div class="col-md-4">
 
-                            </li>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#"><img src="${productCart.getImgMain()}" style="height: 200px"></a>
 
-                            <li>
-                                <div class="btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active">
-                                        <input type="checkbox" checked> Delete
-                                    </label>
-                                </div>
-                            </li>
+                                </li>
 
-                        </ul>
+                                <li>
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <input type="checkbox" checked> Delete
+                                        </label>
+                                    </div>
+                                </li>
+
+                            </ul>
 
 
-                    </div>
+                        </div>
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
 
-                        <!-- Links -->
-                        <a style="font-size: medium;font-weight: bold" href="#" class="text-uppercase">Products Name</a>
+                            <!-- Links -->
+                            <a style="font-size: medium;font-weight: bold" href="#" class="text-uppercase">${productCart.getProductName()}</a>
 
-                        <ul class="list-unstyled">
-                            <li>
-                                <h5 style="font-weight: bold">99.00$</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h5 style="font-weight: bold">${productCart.getPrice()}</h5>
 
-                            </li>
-                            <li>
-                                <div class="counter">
-                                    <label for="para2">Amount :</label>
-                                    <input class="number-input" type="number" id="para2" style="background-color: white;
+                                </li>
+                                <li>
+                                    <div class="counter">
+                                        <label for="para2">Amount :</label>
+                                        <input class="number-input" type="number" id="para2" style="background-color: white;
                  border-width: 1px; border-style: solid; border-color: lightblue slateblue lightblue hotpink;
                   border-image: initial; color: black; text-align: center;
-                 width: 55px; font-size: 18px; line-height: normal; padding: 0px; outline: none;">
+                 width: 55px; font-size: 18px; line-height: normal; padding: 0px; outline: none;" value="${productCart.getAmoutSelect()}">
 
-                                </div>
-                            </li>
-                            <li>
-                                <form action="/">
+                                    </div>
+                                </li>
+                                <li>
+                                    <form action="/">
 
-                                    <label for="cars2">Size :</label>
-                                    <select id="cars2" name="cars">
-                                        <option value="volvo">M</option>
-                                        <option value="saab">L</option>
-                                        <option value="fiat">XL</option>
-                                        <option value="audi">XXL</option>
-                                    </select>
-                                </form>
-                            </li>
-                            <li>
-                                <a href="#!" style="font-size: small">
-                                    - Khách trả thẳng: Tặng thêm Phiếu mua hàng 500.000đ
-                                    <br>
-                                    - Khách trả góp: Trả góp 0% trên giá 8.190.000, Tặng Phiếu mua hàng 200.000đ trừ vào
-                                    tiền trả trước
+                                        <label for="cars2">Size :</label>
+                                        <select id="cars2" name="cars">
+                                            <option value="volvo">${productCart.getSizeSelect()}</option>
 
-                                </a></li>
+                                        </select>
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="#!" style="font-size: small">
+                                        - Khách trả thẳng: Tặng thêm Phiếu mua hàng 500.000đ
+                                        <br>
+                                        - Khách trả góp: Trả góp 0% trên giá 8.190.000, Tặng Phiếu mua hàng 200.000đ trừ vào
+                                        tiền trả trước
 
-                        </ul>
+                                    </a></li>
+
+                            </ul>
+
+                        </div>
+
 
                     </div>
-
-
-                </div>
+                </c:forEach>
                 <hr style="background:#b3b7bb">
-                <div class="row">
 
-                    <div class="col-md-4">
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#"><img src="image/female.jpg" style="height: 200px"></a>
-
-                            </li>
-
-                            <li>
-                                <div class="btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active">
-                                        <input type="checkbox" checked> Delete
-                                    </label>
-                                </div>
-                            </li>
-
-                        </ul>
-
-
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <!-- Links -->
-                        <a style="font-size: medium;font-weight: bold" href="#" class="text-uppercase">Products Name</a>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <h5 style="font-weight: bold">99.00$</h5>
-
-                            </li>
-                            <li>
-                                <div id="counter-one" class="counter">
-                                    <label for="para">Amount :</label>
-                                    <input class="number-input" type="number" id="para" style="background-color: white;
-                 border-width: 1px; border-style: solid; border-color: lightblue slateblue lightblue hotpink;
-                  border-image: initial; color: black; text-align: center;
-                 width: 55px; font-size: 18px; line-height: normal; padding: 0px; outline: none;">
-
-                                </div>
-                            </li>
-                            <li>
-                                <form action="/">
-
-                                    <label for="cars">Size :</label>
-                                    <select id="cars" name="cars">
-                                        <option value="volvo">M</option>
-                                        <option value="saab">L</option>
-                                        <option value="fiat">XL</option>
-                                        <option value="audi">XXL</option>
-                                    </select>
-                                </form>
-                            </li>
-                            <li>
-                                <a href="#!" style="font-size: small">
-                                    - Khách trả thẳng: Tặng thêm Phiếu mua hàng 500.000đ
-                                    <br>
-                                    - Khách trả góp: Trả góp 0% trên giá 8.190.000, Tặng Phiếu mua hàng 200.000đ trừ vào
-                                    tiền trả trước
-
-                                </a></li>
-
-                        </ul>
-
-                    </div>
-
-
-                </div>
                 <div class="row" style="background: white!important;">
 
                     <div class="col-md-4">
@@ -315,14 +276,6 @@
                 <div class="row" style="background: white!important;">
                     <li>
                         <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <input type="radio" id="age1" name="male" value="male">
-                                    <label for="age1">gentlemen</label><br>
-                                    <input type="radio" id="age2" name="female" value="female">
-                                    <label for="age2">Lady</label><br>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="inputName">Name</label>
                                 <input type="text" class="form-control" id="inputName" placeholder="(*)">

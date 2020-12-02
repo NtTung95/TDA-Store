@@ -156,10 +156,13 @@
                    var="product">
             <div class="col-lg-2">
                 <div class="card" style="width: 14rem; border: 1px solid white">
-                    <a href="#"><img src="${product.getImgMain()}" style="max-height: 250px" class="card-img-top" a></a>
+                    <a href="/productDetail?productId=${product.getProductId()}"><img src="${product.getImgMain()}" style="max-height: 250px" class="card-img-top" a></a>
                     <div class="card-body">
                         <form action="/cart" id="formAddCart${product.getProductId()}" method="post">
                             <input type="text" name="action" value="add" hidden>
+                            <input type="number" name="amoutSelect" value="1" hidden>
+                            <input type="text" name="sizeSelect" value="null" hidden>
+
                             <input type="text" name="IdProduct" value="${product.getProductId()}" hidden>
                         </form>
                         <h6>${product.getProductName()}</h6>
@@ -175,7 +178,6 @@
             <script>
                 function addToCart${product.getProductId()}(){
                     $("#formAddCart${product.getProductId()}").submit();
-                    alert("${product.getProductId()}")
                 }
             </script>
         </c:forEach>

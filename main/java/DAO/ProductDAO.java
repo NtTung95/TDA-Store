@@ -2,6 +2,7 @@ package DAO;
 
 import Model.Category;
 import Model.Product;
+import Model.ProductCart;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -223,5 +224,56 @@ public class ProductDAO {
         }
         return product;
     }
+    public static ProductCart getProductDetailCart(String productId,String Size, int amout) {
+        Connection conn = null;
+        ProductCart ProductCart = new ProductCart();
 
+        try {
+
+            conn = DAO.ConnectDB.connectionDB();
+            String query = "select * from product where productId = ?";
+            Statement stmt = null;
+            try {
+                PreparedStatement pre = conn.prepareStatement(query);
+                pre.setString(1, productId);
+                ResultSet rs = pre.executeQuery();
+
+                while (rs.next()) {
+                    ProductCart.setProductId(rs.getInt("productId"));
+                    ProductCart.setCategoryId(rs.getInt("categoryId"));
+                    ProductCart.setQuantity(rs.getInt("quantity"));
+                    ProductCart.setPrice(rs.getInt("price"));
+                    ProductCart.setDescription(rs.getString("description"));
+                    ProductCart.setProductName(rs.getString("productName"));
+                    ProductCart.setImgMain(rs.getString("imgMain"));
+                    ProductCart.setSizeSelect(Size);
+                    ProductCart.setAmoutSelect(amout);
+
+                }
+
+
+//                while (rs.next()) {
+//                    String name = rs.getString("username");
+//                    System.out.println(name);
+//                }
+            } catch (SQLException e) {
+                throw new Error("Problem", e);
+            } finally {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+        } catch (SQLException e) {
+            throw new Error("Problem", e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return ProductCart;
+    }
 }
