@@ -1,4 +1,4 @@
-package Controller.Customer;
+package Controller.Admin.Account;
 
 import DAO.customer.CustomerDAO;
 import Model.Customer;
