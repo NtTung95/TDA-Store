@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "CustomerServlet", urlPatterns = {"/customer","/register"})
+@WebServlet(name = "CustomerServlet", urlPatterns = {"/customer","/register","/admin/customer"})
 public class CustomerServlet extends HttpServlet {
     private CustomerDAO customerDAO = new CustomerDAO();
 //    private List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
@@ -74,7 +74,7 @@ public class CustomerServlet extends HttpServlet {
 
         request.setAttribute("listCustomer", listCustomer);
         request.setAttribute("typeAccountList", typeAccounts);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -136,7 +136,7 @@ public class CustomerServlet extends HttpServlet {
 
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 

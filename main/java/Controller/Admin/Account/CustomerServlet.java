@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "CustomerServlet", urlPatterns = {"/customer","/register"})
+@WebServlet(name = "CustomerServlet", urlPatterns = {"/customer","/register","/admin/customer"})
 public class CustomerServlet extends HttpServlet {
     private CustomerDAO customerDAO = new CustomerDAO();
 
@@ -69,7 +69,7 @@ public class CustomerServlet extends HttpServlet {
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -132,7 +132,7 @@ public class CustomerServlet extends HttpServlet {
 
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
