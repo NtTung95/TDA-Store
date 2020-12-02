@@ -22,7 +22,7 @@
                     <h3 class="text-center font-weight-light my-4">Create Account</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" action="/customer">
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -74,7 +74,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mt-4 mb-0"><button class="btn btn-primary btn-block" type="submit">Create Account</button></div>
+                        <div class="form-group mt-4 mb-0">
+                            <input type="text" name="action" value="create" hidden>
+                            <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+                        </div>
                     </form>
                 </div>
                 <div class="card-footer text-center">

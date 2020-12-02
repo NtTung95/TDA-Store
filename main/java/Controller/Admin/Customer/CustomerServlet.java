@@ -2,6 +2,7 @@ package Controller.Admin.Customer;
 
 import DAO.customer.CustomerDAO;
 import Model.Customer;
+import Model.TypeAccount;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,9 +52,6 @@ public class CustomerServlet extends HttpServlet {
                 case "create":
                     showNewForm(request, response);
                     break;
-                case "edit":
-                    showEditForm(request, response);
-                    break;
                 case "delete":
                     deleteCustomer(request, response);
                     break;
@@ -67,8 +65,12 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
+
+        request.setAttribute("typeAccountList", typeAccounts);
         request.setAttribute("listCustomer", listCustomer);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
@@ -77,16 +79,6 @@ public class CustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
         dispatcher.forward(request, response);
-    }
-
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
-        int customerId = Integer.parseInt(request.getParameter("customerID"));
-        Customer editCustomer = customerDAO.selectCustomer(customerId);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/edit.jsp");
-        request.setAttribute("customer", editCustomer);
-        dispatcher.forward(request, response);
-
     }
 
     private void insertCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
@@ -107,6 +99,9 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
+        request.setAttribute("typeAccountList", typeAccounts);
+        int customerId = Integer.parseInt(request.getParameter("customerID"));
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
@@ -116,13 +111,12 @@ public class CustomerServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         int typeAccountId = Integer.parseInt(request.getParameter("typeAccountId"));
-        Customer customer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId);
+        Customer customer = new Customer(customerId ,userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId);
         customerDAO.updateCustomer(customer);
 
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 

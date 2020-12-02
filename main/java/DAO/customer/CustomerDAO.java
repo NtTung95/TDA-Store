@@ -15,7 +15,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
     private static final String SELECT_CUSTOMER_BY_ID = "select userName, password, firstName, surName, birthDay, phoneNumber, address, email from users where customerID = ?";
     private static final String SELECT_ALL_CUSTOMER = "select * from customer";
     private static final String DELETE_CUSTOMER = "delete from customer where customerID = ?;";
-    private static final String UPDATE_CUSTOMER = "update customer set userName = ?, password = ?, firstName = ?, surName = ?, birthDay = ?, phoneNumber, address = ?, email= ?, typeAccountID = ? where userID = ?;";
+    private static final String UPDATE_CUSTOMER = "update customer set userName = ?, password = ?, firstName = ?, surName = ?, birthDay = ?, phoneNumber=?, address = ?, email= ?, typeAccountID = ? where customerID = ?;";
     private static final String CHECK_LOGIN = "select * from customer where userName = ? and password = ?";
 
     @Override

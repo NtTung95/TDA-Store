@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 </head>
 <body>
-
+<%--body--%>
 <div class="container-fluid">
     <h1 class="left-container">User Management</h1>
     <h2 class="right-container">
@@ -34,7 +34,7 @@
             <th>Email</th>
             <th>Address</th>
             <th>TypeAccountId</th>
-            <td>Actions</td>
+            <th>Actions</th>
         </tr>
         <c:forEach var="customer" items="${listCustomer}">
             <tr>
@@ -48,16 +48,16 @@
                 <td>${customer.email}</td>
                 <td>${customer.typeAccountId}</td>
                 <td>
-                    <button class="btn btn-primary" type="submit" data-toggle="modal"
+                    <button class="btn btn-primary" data-toggle="modal"
                             data-target="#editModal${customer.customerID}">Edit
                     </button>
-                    <button class="btn btn-danger" type="submit"
-                            href="/customer?action=delete&customerId=${customer.customerID}">Delete
-                    </button>
+                    <a class="btn btn-danger" type="submit"
+                            href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete
+                    </a>
                 </td>
             </tr>
             <!-- Modal -->
-            <form method="post">
+            <form method="post" action="/customer">
                 <div class="row justify-content-center">
                     <div class="modal fade" id="editModal${customer.customerID}" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,19 +142,19 @@
 
                                     <div class="form-group">
                                         <label class="small mb-1">Type Account</label>
-                                        <select class="form-control required" name="categoryId">
+                                        <select class="form-control required" name="typeAccountId">
                                             <c:forEach items='${requestScope["typeAccountList"]}'
                                                        var="typeAccountEdit">
-                                                <option name="typeAccountId"
+                                                <option
                                                         value="${typeAccountEdit.getTypeAccountId()}">${typeAccountEdit.getTypeOfAccount()}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <input type="text" name="action" value="edit" hidden/>
+                                    <input type="submit" class="btn btn-primary" value="Save"/>
                                 </div>
                             </div>
                         </div>
