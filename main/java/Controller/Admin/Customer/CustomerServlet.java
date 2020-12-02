@@ -2,7 +2,6 @@ package Controller.Admin.Customer;
 
 import DAO.customer.CustomerDAO;
 import Model.Customer;
-import Model.TypeAccount;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +16,6 @@ import java.util.List;
 @WebServlet(name = "CustomerServlet", urlPatterns = {"/customer","/register","/admin/customer"})
 public class CustomerServlet extends HttpServlet {
     private CustomerDAO customerDAO = new CustomerDAO();
-//    private List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -70,11 +68,8 @@ public class CustomerServlet extends HttpServlet {
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
-        List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
-
         request.setAttribute("listCustomer", listCustomer);
-        request.setAttribute("typeAccountList", typeAccounts);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -91,6 +86,7 @@ public class CustomerServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("customer/edit.jsp");
         request.setAttribute("customer", editCustomer);
         dispatcher.forward(request, response);
+
     }
 
     private void insertCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
@@ -136,7 +132,7 @@ public class CustomerServlet extends HttpServlet {
 
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 
