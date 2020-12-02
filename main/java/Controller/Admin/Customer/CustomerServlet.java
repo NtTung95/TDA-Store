@@ -10,11 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CustomerServlet", urlPatterns = {"/customer","/register","/admin/customer"})
+@WebServlet(name = "CustomerServlet", urlPatterns = {"/admin/customer"})
 public class CustomerServlet extends HttpServlet {
     private CustomerDAO customerDAO = new CustomerDAO();
 
@@ -65,14 +67,23 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
-        List<Customer> listCustomer = customerDAO.selectAllCustomer();
+        HttpSession session = request.getSession();
+        Customer loggedCustomer = (Customer) session.getAttribute("loggedCustomer");
+        if (loggedCustomer == null){
+            response.sendRedirect("/login");
+        }else {
+            if (loggedCustomer.getTypeAccountId() == 10001){
+                List<TypeAccount> typeAccounts = customerDAO.getTypeAccountList();
+                List<Customer> listCustomer = customerDAO.selectAllCustomer();
+                request.setAttribute("typeAccountList", typeAccounts);
+                request.setAttribute("listCustomer", listCustomer);
 
-        request.setAttribute("typeAccountList", typeAccounts);
-        request.setAttribute("listCustomer", listCustomer);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
-        dispatcher.forward(request, response);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("listCustomer.jsp");
+                requestDispatcher.forward(request,response);
+            }else {
+                response.sendRedirect("/error.jsp");
+            }
+        }
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
@@ -99,7 +110,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        List<TypeAccount> typeAccounts = customerDAO.getTypeAccount();
+        List<TypeAccount> typeAccounts = customerDAO.getTypeAccountList();
         request.setAttribute("typeAccountList", typeAccounts);
         int customerId = Integer.parseInt(request.getParameter("customerID"));
         String userName = request.getParameter("userName");
@@ -129,5 +140,4 @@ public class CustomerServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
-
 }

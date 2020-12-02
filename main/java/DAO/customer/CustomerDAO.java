@@ -5,6 +5,8 @@ import DAO.ConnectDB;
 import Model.Customer;
 import Model.TypeAccount;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
     private static final String DELETE_CUSTOMER = "delete from customer where customerID = ?;";
     private static final String UPDATE_CUSTOMER = "update customer set userName = ?, password = ?, firstName = ?, surName = ?, birthDay = ?, phoneNumber=?, address = ?, email= ?, typeAccountID = ? where customerID = ?;";
     private static final String CHECK_LOGIN = "select * from customer where userName = ? and password = ?";
+    private static final int CHECK_ADMIN = 10001;
 
     @Override
     public void insertUser(Customer customer) throws SQLException {
@@ -58,7 +61,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                 String email = rs.getString("email");
                 int typeAccountId = Integer.parseInt(rs.getString("typeAccountId"));
 
-                customer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId);
+                customer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber, address, email, typeAccountId);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -84,7 +87,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                 String address = rs.getString("address");
                 String email = rs.getString("email");
                 int typeAccountId = rs.getInt("typeAccountId");
-                customers.add(new Customer(customerID ,userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId));
+                customers.add(new Customer(customerID, userName, password, firstName, surName, birthDay, phoneNumber, address, email, typeAccountId));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -134,13 +137,8 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
 
             ResultSet rs = statement.executeQuery();
 
-            while (rs.next()){
-                String user = rs.getString("userName");
-                String pw = rs.getString("password");
-                if(user.equals(userName) && pw.equals(password)){
-                    isLogin = true;
-                }
-            }
+            isLogin = rs.next();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -163,7 +161,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
         }
     }
 
-    public static Customer getInfoLogin(String usernameCheck, String passwordCheck){
+    public static Customer getInfoLogin(String usernameCheck, String passwordCheck) {
         Connection conn = null;
         Customer customer = new Customer();
         try {
@@ -173,11 +171,10 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
             Statement stmt = null;
             try {
                 PreparedStatement pre = conn.prepareStatement(query);
-                pre.setString(1,usernameCheck);
-                pre.setString(2,passwordCheck);
+                pre.setString(1, usernameCheck);
+                pre.setString(2, passwordCheck);
                 ResultSet rs = pre.executeQuery();
-
-                if(rs.next()){
+                if (rs.next()) {
                     customer.setUsername(rs.getString("username"));
                     customer.setFirstname(rs.getString("firstName"));
                     customer.setAddress(rs.getString("address"));
@@ -188,10 +185,12 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                     customer.setPhoneNumber(rs.getString("phoneNumber"));
                     customer.setTypeAccountId(rs.getInt("typeAccountID"));
                 }
-            } catch (SQLException e ) {
+            } catch (SQLException e) {
                 throw new Error("Problem", e);
             } finally {
-                if (stmt != null) { stmt.close(); }
+                if (stmt != null) {
+                    stmt.close();
+                }
             }
         } catch (SQLException e) {
             throw new Error("Problem", e);
@@ -207,7 +206,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
         return customer;
     }
 
-    public List<TypeAccount> getTypeAccount() {
+    public List<TypeAccount> getTypeAccountList() {
         List<TypeAccount> typeAccounts = new ArrayList<>();
         try (Connection connection = ConnectDB.connectionDB();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from typeofaccount;")) {
@@ -216,13 +215,20 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
             while (rs.next()) {
                 int typeAccountId = rs.getInt("typeAccountId");
                 String typeAccount = rs.getString("typeOfAccount");
-
-                typeAccounts.add(new TypeAccount(typeAccountId,typeAccount));
+                typeAccounts.add(new TypeAccount(typeAccountId, typeAccount));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
         return typeAccounts;
+    }
+
+    public boolean checkAdmin(Customer customer){
+        boolean isAdmin = false;
+        if(customer.getTypeAccountId() == CHECK_ADMIN){
+            isAdmin = true;
+        }
+        return isAdmin;
     }
 
 }

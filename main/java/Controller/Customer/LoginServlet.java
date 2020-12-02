@@ -22,11 +22,11 @@ public class LoginServlet extends HttpServlet {
         if(us.checkLogin(username,password)) {
             HttpSession session = request.getSession();
             Customer customer = CustomerDAO.getInfoLogin(username,password);
+            session.setAttribute("loggedCustomer", customer);
             session.setAttribute("nameLogin",username);
             session.setAttribute("typeOfId",customer.getTypeAccountId());
             request.getRequestDispatcher("index.jsp").forward(request,response);
         } else {
-//            response.sendRedirect("/login.jsp");
             request.getRequestDispatcher("login.jsp").forward(request,response);
         }
     }

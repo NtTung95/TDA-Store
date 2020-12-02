@@ -1,7 +1,10 @@
 package Controller.Admin.Product;
 
 import DAO.ProductDAO;
+import DAO.customer.CustomerDAO;
 import Model.Category;
+import Model.Customer;
+import Model.TypeAccount;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,11 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "Product", urlPatterns = "/admin/product")
 public class Product extends HttpServlet {
+    CustomerDAO customerDAO = new CustomerDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = (String) request.getParameter("action");
         switch (action) {
@@ -24,14 +30,32 @@ public class Product extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Model.Product> products = ProductDAO.getProductInDb();
-        request.setAttribute("listProduct", products);
+//        ArrayList<Model.Product> products = ProductDAO.getProductInDb();
+//        request.setAttribute("listProduct", products);
+//
+//        ArrayList<Category> categories = ProductDAO.loadCategory();
+//        request.setAttribute("listCategory", categories);
+//
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admin/product.jsp");
+//        requestDispatcher.forward(request, response);
 
-        ArrayList<Category> categories = ProductDAO.loadCategory();
-        request.setAttribute("listCategory", categories);
+        HttpSession session = request.getSession();
+        Customer loggedCustomer = (Customer) session.getAttribute("loggedCustomer");
+        if (loggedCustomer == null){
+            response.sendRedirect("/login");
+        }else {
+            if (loggedCustomer.getTypeAccountId() == 10001){
+                List<TypeAccount> typeAccounts = customerDAO.getTypeAccountList();
+                List<Customer> listCustomer = customerDAO.selectAllCustomer();
+                request.setAttribute("typeAccountList", typeAccounts);
+                request.setAttribute("listCustomer", listCustomer);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admin/product.jsp");
-        requestDispatcher.forward(request, response);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admin/product.jsp");
+                requestDispatcher.forward(request,response);
+            }else {
+                response.sendRedirect("/error.jsp");
+            }
+        }
     }
 
     protected void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

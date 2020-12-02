@@ -13,6 +13,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="bg-dark">
+<h3><a href="/homepage">Home</a></h3>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -81,14 +82,12 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <div class="small"><a href="login.jsp">Have an account? Go to login</a></div>
+                    <div class="small"><a href="/login">Have an account? Go to login</a></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
