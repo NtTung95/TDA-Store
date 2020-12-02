@@ -316,30 +316,30 @@
                                     <input type="text"  name="SizeXXLProduct" class="form-control" value="${product.getSize_XXL()}">
                                 </div>
                                 <input type="text" name="action" value="update" style="display: none">
-                                <div class="submmitButton col-sm-2">
-                                    <input type="button" onclick="submitForm${product.getProductId()}()" class="btn btn-primary" value="Update">
-                                </div>
+<%--                                <div class="submmitButton col-sm-3">--%>
+<%--                                    <input type="button" onclick="submitForm${product.getProductId()}()" class="btn btn-primary" value="Update">--%>
+<%--                                </div>--%>
                             </form>
                         </div>
-<%--                        <!-- Modal footer -->--%>
-<%--                        <div class="modal-footer">--%>
-<%--                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>--%>
-<%--                        </div>--%>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button"  onclick="submitForm${product.getProductId()}()" class="btn btn-primary">Update</button>
+                        </div>
                         <script>
                             function submitForm${product.getProductId()}(){
                                 Swal.fire({
                                     title: 'Are you sure?',
-                                    text: "You won't be able to revert this!",
+                                    text: "You won't be able to update this!",
                                     icon: 'warning',
                                     showCancelButton: true,
                                     confirmButtonColor: '#3085d6',
                                     cancelButtonColor: '#d33',
-                                    confirmButtonText: 'Yes, delete it!'
+                                    confirmButtonText: 'Yes, update it!'
                                 }).then((result) => {
                                     if (result.isConfirmed) {
                                         Swal.fire(
-                                            'Deleted!',
-                                            'Your file has been deleted.',
+                                            'Update!',
+                                            'Your Product has been update.',
                                             'success'
                                         )
                                         $("#formSubmit${product.getProductId()}").submit();
