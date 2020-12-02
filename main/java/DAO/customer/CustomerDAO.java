@@ -76,7 +76,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                int customerID = Integer.parseInt(rs.getString("customerID"));
+                int customerID = rs.getInt("customerID");
                 String userName = rs.getString("userName");
                 String password = rs.getString("password");
                 String firstName = rs.getString("firstName");
@@ -85,7 +85,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                 String phoneNumber = rs.getString("phoneNumber");
                 String address = rs.getString("address");
                 String email = rs.getString("email");
-                int typeAccountId = Integer.parseInt(rs.getString("typeAccountId"));
+                int typeAccountId = rs.getInt("typeAccountId");
                 customers.add(new Customer(customerID ,userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId));
             }
         } catch (SQLException e) {
