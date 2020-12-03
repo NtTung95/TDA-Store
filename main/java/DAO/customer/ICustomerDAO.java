@@ -15,6 +15,4 @@ public interface ICustomerDAO {
     boolean deleteCustomer(int id) throws SQLException;
 
     boolean updateCustomer(Customer user) throws SQLException;
-
-    boolean checkLogin(String userName, String password);
 }

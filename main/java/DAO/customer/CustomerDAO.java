@@ -127,8 +127,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
         return rowUpdated;
     }
 
-    @Override
-    public boolean checkLogin(String userName, String password) {
+    public static boolean checkLogin(String userName, String password) {
         boolean isLogin = false;
         try (Connection connection = ConnectDB.connectionDB();
              PreparedStatement statement = connection.prepareStatement(CHECK_LOGIN)) {

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="DAO.customer.CustomerDAO" %><%--
 Created by IntelliJ IDEA.
 User: Admin
 Date: 01/12/2020
@@ -65,10 +65,8 @@ To change this template use File | Settings | File Templates.
                                 <label class="small mb-1">Password</label>
                                 <input class="form-control py-4" type="password" name="password"
                                        placeholder="Enter password"/>
-                                <p class="invalid-feedback" name="error-login" id="error-login">
-
-                                </p>
                             </div>
+                            <h class="text-danger"> ${messages} </h>
                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                 <button class="btn btn-primary" type="submit">Login</button>
                             </div>
