@@ -57,13 +57,13 @@
 
     <div class="tableProduct">
         <div class="div-addproduct">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
                 Open modal
             </button>
 
         </div>
         <!-- The Modal -->
-        <div class="modal fade" id="myModal">
+        <div class="modal fade" id="modalAdd">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <!-- Modal Header -->
@@ -74,11 +74,11 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form action="" method="post">
-                            <div class="form-group col-sm-4 row1">
-                                <label for="">ProductId:</label>
-                                <input type="text" name="productId" id="idProduct" class="form-control">
-                            </div>
+                        <form action="/admin/product" method="post" id="formSubmitAdd">
+<%--                            <div class="form-group col-sm-4 row1">--%>
+<%--                                <label for="">ProductId:</label>--%>
+<%--                                <input type="text" name="productId" id="idProduct" class="form-control">--%>
+<%--                            </div>--%>
                             <div class="form-group col-sm-4 row1">
                                 <label for="">Product Name:</label>
                                 <input type="text" name="productName" id="ProductName" class="form-control">
@@ -86,7 +86,10 @@
                             <div class="form-group col-sm-4 row1">
                                 <label for="">Category:</label>
                                 <select name="categoryProduct" id="Category" class="form-control">
-                                    <option value=""></option>
+                                    <c:forEach items='${requestScope["listCategory"]}'
+                                               var="category">
+                                        <option value="${category.getCategoryId()}">${category.getNameCategory()}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group col-sm-4 row1">
@@ -145,37 +148,78 @@
                                 <img id="blah5" class="imgPreview" src="https://batdongsankhanhhoa.com.vn/FileStorage/Product/no-image.jpg"
                                 />
                             </div>
-
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $('#imgInp1').bind('input', function () {
+                                        $('#blah1').attr('src', $(this).val()); //concatinate path if required
+                                    });
+                                    $('#imgInp2').bind('input', function () {
+                                        $('#blah2').attr('src', $(this).val()); //concatinate path if required
+                                    });
+                                    $('#imgInp3').bind('input', function () {
+                                        $('#blah3').attr('src', $(this).val()); //concatinate path if required
+                                    });
+                                    $('#imgInp4').bind('input', function () {
+                                        $('#blah4').attr('src', $(this).val()); //concatinate path if required
+                                    });
+                                    $('#imgInp5').bind('input', function () {
+                                        $('#blah5').attr('src', $(this).val()); //concatinate path if required
+                                    });
+                                });
+                            </script>
                             <div class="form-group col-sm-2 row1">
                                 <label for="">Size S:</label>
-                                <input type="text" name="SizeSProduct" id="" class="form-control">
+                                <input type="text" name="SizeSProduct" class="form-control">
                             </div>
                             <div class="form-group col-sm-2 row1">
                                 <label for="">Size M:</label>
-                                <input type="text" name="SizeMProduct" id="" class="form-control">
+                                <input type="text" name="SizeMProduct" class="form-control">
                             </div>
                             <div class="form-group col-sm-2 row1">
                                 <label for="">Size L:</label>
-                                <input type="text" name="SizeLProduct" id="" class="form-control">
+                                <input type="text" name="SizeLProduct" class="form-control">
                             </div>
                             <div class="form-group col-sm-2 row1">
                                 <label for="">Size XL:</label>
-                                <input type="text" name="SizeXLProduct" id="" class="form-control">
+                                <input type="text" name="SizeXLProduct" class="form-control">
                             </div>
                             <div class="form-group col-sm-2 row1">
                                 <label for="">Size XXL:</label>
-                                <input type="text" name="SizeXXLProduct" id="" class="form-control">
+                                <input type="text" name="SizeXXLProduct" class="form-control">
                             </div>
+                            <input type="text" name="action" value="add" hidden>
+                            <button type="button"  onclick="submitFormAdd()" class="btn btn-primary">Update</button>
 
                         </form>
                     </div>
 
                 </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
+<%--                <!-- Modal footer -->--%>
+<%--                <div class="modal-footer">--%>
+<%--                </div>--%>
+                <script>
+                    function submitFormAdd(){
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to update this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, update it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                    'Update!',
+                                    'Your Product has been update.',
+                                    'success'
+                                )
+                                $("#formSubmitAdd").submit();
+                            }
+                        })
+                    }
+                </script>
 
             </div>
         </div>
@@ -221,7 +265,7 @@
                             <form action="/admin/product" id="formSubmit${product.getProductId()}" method="post">
                                 <div class="form-group col-sm-4 row1">
                                     <label for="">ProductId:</label>
-                                    <input type="text" name="productId" id="productId" class="form-control" value="${product.getProductId()}" readonly>
+                                    <input type="text" name="productId"  class="form-control" value="${product.getProductId()}" readonly>
                                 </div>
                                 <div class="form-group col-sm-4 row1">
                                     <label for="">Product Name:</label>
@@ -297,7 +341,7 @@
 
                                 <div class="form-group col-sm-2 row1">
                                     <label for="">Size S:</label>
-                                    <input type="text" name="SizeSProduct"class="form-control" value="${product.getSize_S()}">
+                                    <input type="text" name="SizeSProduct" class="form-control" value="${product.getSize_S()}">
                                 </div>
                                 <div class="form-group col-sm-2 row1">
                                     <label for="">Size M:</label>

@@ -27,6 +27,9 @@ public class Product extends HttpServlet {
             case "update":
                 updateProduct(request, response);
                 break;
+            case "add":
+                AddProduct(request,response);
+                break;
         }
     }
 
@@ -100,7 +103,7 @@ public class Product extends HttpServlet {
         String SizeLProduct = request.getParameter("SizeLProduct");
         String SizeXLProduct = request.getParameter("SizeXLProduct");
         String SizeXXLProduct = request.getParameter("SizeXXLProduct");
-        boolean isValid = ProductDAO.EditProduct(ProductId, categoryProduct, quantityProduct, priceProduct, descriptionProduct, productName, imgMainProduct, img1Product, img2Product, img3Product, img4Product, SizeSProduct, SizeMProduct, SizeLProduct, SizeXLProduct, SizeXXLProduct);
+        boolean isValid = ProductDAO.addNewProduct(categoryProduct,quantityProduct,priceProduct,descriptionProduct,productName,imgMainProduct,img1Product,img2Product,img3Product,img4Product,SizeSProduct,SizeMProduct,SizeLProduct,SizeXLProduct,SizeXXLProduct);
         if (isValid) {
             response.sendRedirect("/admin/product");
         }
