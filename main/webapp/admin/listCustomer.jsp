@@ -18,7 +18,7 @@
 <%--body--%>
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">LACOSTE</a>
+        <a class="navbar-brand" href="#"><h3>LACOSTE</h3></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,23 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/homepage">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/products">Products</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Category
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <%--list category product--%>
-                        <c:forEach items='${requestScope["categoryList"]}'
-                                   var="category">
-                            <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                        </c:forEach>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/product">Product Management</a>
                 </li>
             </ul>
         </div>
@@ -52,7 +42,7 @@
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table mr-1"></i>
-        <h2>User Management</h2>
+        <h4>User Management</h4>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -102,21 +92,52 @@
                             <button class="btn btn-primary" data-toggle="modal"
                                     data-target="#editModal${customer.customerID}">Edit
                             </button>
-                            <a class="btn btn-danger" type="submit"
-                               href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete
-                            </a>
+<%--                            <a class="btn btn-danger" type="submit"--%>
+<%--                               href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete--%>
+<%--                            </a>--%>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteModal${customer.customerID}">
+                                Delete
+                            </button>
                         </td>
                     </tr>
+
+
+                    <!-- Modal Delete Customer -->
+                    <div class="modal fade" id="deleteModal${customer.customerID}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirm</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure to delete this user?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    <a type="submit" class="btn btn-danger" href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                     <!-- Modal Edit Customer -->
 
                         <div class="row justify-content-center">
                             <div class="modal fade" id="editModal${customer.customerID}" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 aria-labelledby="editModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <form method="post" action="/admin/customer">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="text-center modal-title" id="exampleModalLabel">Edit Customer</h5>
+                                            <h5 class="text-center modal-title" id="editModalLabel">Edit Customer</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>

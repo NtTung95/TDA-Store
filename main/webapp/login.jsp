@@ -31,19 +31,6 @@ To change this template use File | Settings | File Templates.
             <li class="nav-item">
                 <a class="nav-link" href="/products">Products</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Category
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%--list category product--%>
-                    <c:forEach items='${requestScope["categoryList"]}'
-                               var="category">
-                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                    </c:forEach>
-                </div>
-            </li>
         </ul>
     </div>
 </nav>

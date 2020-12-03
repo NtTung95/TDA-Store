@@ -22,9 +22,6 @@ public class CustomerServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
         try {
             if ("edit".equals(action)) {
                 updateCustomer(request, response);
@@ -42,9 +39,6 @@ public class CustomerServlet extends HttpServlet {
 
         try {
             switch (action) {
-                case "login":
-                    request.getRequestDispatcher("login.jsp").forward(request,response);
-                    break;
                 case "delete":
                     deleteCustomer(request, response);
                     break;
