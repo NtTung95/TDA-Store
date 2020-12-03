@@ -18,6 +18,8 @@ public class Logout extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("nameLogin");
         session.removeAttribute("typeOfId");
+        session.setAttribute("nullCustomer",null);
+
         response.sendRedirect("/homepage");
     }
 }

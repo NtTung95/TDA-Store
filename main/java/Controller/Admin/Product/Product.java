@@ -37,21 +37,11 @@ public class Product extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        ArrayList<Model.Product> products = ProductDAO.getProductInDb();
-//        request.setAttribute("listProduct", products);
-//
-//        ArrayList<Category> categories = ProductDAO.loadCategory();
-//        request.setAttribute("listCategory", categories);
-//
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admin/product.jsp");
-//        requestDispatcher.forward(request, response);
-
         HttpSession session = request.getSession();
-        int typeOfId = (int) session.getAttribute("typeOfId");
-        if (typeOfId == 0) {
+        if (session.getAttribute("nullCustomer") == null){
             response.sendRedirect("/login");
-        } else {
-            if (typeOfId == CustomerDAO.CHECK_ADMIN) {
+        }else {
+            if ((int) session.getAttribute("typeOfId")==CustomerDAO.CHECK_ADMIN){
                 ArrayList<Model.Product> products = ProductDAO.getProductInDb();
                 request.setAttribute("listProduct", products);
 

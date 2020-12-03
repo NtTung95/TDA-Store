@@ -18,9 +18,10 @@ public class LoginServlet extends HttpServlet {
         CustomerDAO us = new CustomerDAO();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        Customer customer = CustomerDAO.getInfoLogin(username,password);
         HttpSession session = request.getSession();
+        session.setAttribute("nullCustomer",customer);
         if(us.checkLogin(username,password)) {
-            Customer customer = CustomerDAO.getInfoLogin(username,password);
             session.setAttribute("loggedCustomer", customer);
             session.setAttribute("nameLogin",username);
             session.setAttribute("typeOfId",customer.getTypeAccountId());

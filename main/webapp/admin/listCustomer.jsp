@@ -17,8 +17,8 @@
 <body>
 <%--body--%>
 <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><h3>LACOSTE</h3></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="/homepage"><h3>LACOSTE</h3></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,37 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/product">Product Management</a>
+                </li>
+
+                <%
+                    String nameResult = (String) session.getAttribute("nameLogin");
+                    String url = "/login";
+                    String menu1 = "Login";
+                    String urlMenu1 = "/login";
+                    String menu2 = "Register";
+                    String urlMenu2 = "/register";
+                    if (nameResult == null) {
+                        nameResult = "Login";
+                    } else {
+                        url = "#";
+                        menu1 = "profile";
+                        urlMenu1 = "/inforcustomer";
+                        menu2 = "logout";
+                        urlMenu2 = "/logout";
+                    }
+                %>
+                <li class="nav-item active">
+                    <div class="dropdown">
+                        <a class="nav-link dropbtn" href="<%=url%>" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            <%=nameResult%>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="<%=urlMenu1%>"><%=menu1%>
+                            </a>
+                            <a class="dropdown-item" href="<%=urlMenu2%>"><%=menu2%>
+                            </a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -92,9 +123,9 @@
                             <button class="btn btn-primary" data-toggle="modal"
                                     data-target="#editModal${customer.customerID}">Edit
                             </button>
-<%--                            <a class="btn btn-danger" type="submit"--%>
-<%--                               href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete--%>
-<%--                            </a>--%>
+                                <%--                            <a class="btn btn-danger" type="submit"--%>
+                                <%--                               href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete--%>
+                                <%--                            </a>--%>
                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#deleteModal${customer.customerID}">
                                 Delete
@@ -104,7 +135,8 @@
 
 
                     <!-- Modal Delete Customer -->
-                    <div class="modal fade" id="deleteModal${customer.customerID}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal${customer.customerID}" tabindex="-1"
+                         aria-labelledby="deleteModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -119,22 +151,21 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                                    <a type="submit" class="btn btn-danger" href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete</a>
+                                    <a type="submit" class="btn btn-danger"
+                                       href="/admin/customer?action=delete&customerId=${customer.customerID}">Delete</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
-
-
                     <!-- Modal Edit Customer -->
 
-                        <div class="row justify-content-center">
-                            <div class="modal fade" id="editModal${customer.customerID}" tabindex="-1" role="dialog"
-                                 aria-labelledby="editModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <form method="post" action="/admin/customer">
+                    <div class="row justify-content-center">
+                        <div class="modal fade" id="editModal${customer.customerID}" tabindex="-1" role="dialog"
+                             aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <form method="post" action="/admin/customer">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="text-center modal-title" id="editModalLabel">Edit Customer</h5>
@@ -225,15 +256,16 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
                                             <input type="text" name="action" value="edit" hidden/>
                                             <input type="submit" class="btn btn-primary" value="Save"/>
                                         </div>
                                     </div>
-                                    </form>
-                                </div>
+                                </form>
                             </div>
                         </div>
+                    </div>
                 </c:forEach>
                 </tbody>
             </table>
@@ -261,9 +293,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#example').DataTable();
-    } );
+    });
 </script>
 </body>
 </html>

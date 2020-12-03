@@ -53,9 +53,10 @@ To change this template use File | Settings | File Templates.
                                 <input class="form-control py-4" type="password" name="password"
                                        placeholder="Enter password"/>
                             </div>
-                            <h class="text-danger"> ${messages} </h>
+<%--                            <h class="text-danger"> ${messages} </h>--%>
+                            <small id="emailHelp" class="text-danger">${messages}</small>
                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                <button class="btn btn-primary" type="submit">Login</button>
+                                <button class="btn btn-primary btn-block" type="submit">Login</button>
                             </div>
                         </form>
                     </div>
