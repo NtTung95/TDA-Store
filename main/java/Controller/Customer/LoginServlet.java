@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loggedCustomer", customer);
             session.setAttribute("nameLogin",username);
             session.setAttribute("typeOfId",customer.getTypeAccountId());
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+            response.sendRedirect("/homepage");
         } else {
             request.getRequestDispatcher("login.jsp").forward(request,response);
         }

@@ -31,7 +31,7 @@
                                 <li>
                                     <c:forEach items='${requestScope["categoryList"]}'
                                                var="category">
-                                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
                                     </c:forEach>
 
                                     <%--                                    <a href="#">Shirt</a>--%>
@@ -57,7 +57,7 @@
                                 <li>
                                     <c:forEach items='${requestScope["categoryList"]}'
                                                var="category">
-                                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
                                     </c:forEach>
                                     <%--                                    <a href="#">T-shirt</a>--%>
                                     <%--                                    <a href="#">Shirt</a>--%>
@@ -156,7 +156,7 @@
                    var="product">
             <div class="col-lg-2">
                 <div class="card" style="width: 14rem; border: 1px solid white">
-                    <a href="/productDetail?productId=${product.getProductId()}"><img src="${product.getImgMain()}" style="max-height: 250px" class="card-img-top" a></a>
+                    <a href="/productsDetail?productId=${product.getProductId()}"><img src="${product.getImgMain()}" style="max-height: 250px" class="card-img-top" a></a>
                     <div class="card-body">
                         <form action="/cart" id="formAddCart${product.getProductId()}" method="post">
                             <input type="text" name="action" value="add" hidden>

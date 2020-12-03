@@ -35,7 +35,7 @@
                                 <li>
                                     <c:forEach items='${requestScope["categoryList"]}'
                                                var="category">
-                                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
                                     </c:forEach>
 
                                     <%--                                    <a href="#">Shirt</a>--%>
@@ -61,7 +61,7 @@
                                 <li>
                                     <c:forEach items='${requestScope["categoryList"]}'
                                                var="category">
-                                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
                                     </c:forEach>
                                     <%--                                    <a href="#">T-shirt</a>--%>
                                     <%--                                    <a href="#">Shirt</a>--%>
