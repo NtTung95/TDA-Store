@@ -21,11 +21,12 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if(us.checkLogin(username,password)) {
             Customer customer = CustomerDAO.getInfoLogin(username,password);
+            session.setAttribute("loggedCustomer", customer);
             session.setAttribute("nameLogin",username);
             session.setAttribute("typeOfId",customer.getTypeAccountId());
             response.sendRedirect("/homepage");
         } else {
-            request.setAttribute("messages","*Your username or password is wrong! Please try again.");
+            request.setAttribute("messages", "*Your username or password is wrong! Please try again.");
             request.getRequestDispatcher("login.jsp").forward(request,response);
         }
     }
