@@ -68,11 +68,11 @@ public class CustomerServlet extends HttpServlet {
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         HttpSession session = request.getSession();
-        Customer loggedCustomer = (Customer) session.getAttribute("loggedCustomer");
-        if (loggedCustomer == null){
+        int typeOfId = (int) session.getAttribute("typeOfId");
+        if (typeOfId == 0){
             response.sendRedirect("/login");
         }else {
-            if (loggedCustomer.getTypeAccountId() == 10001){
+            if (typeOfId==CustomerDAO.CHECK_ADMIN){
                 List<TypeAccount> typeAccounts = customerDAO.getTypeAccountList();
                 List<Customer> listCustomer = customerDAO.selectAllCustomer();
                 request.setAttribute("typeAccountList", typeAccounts);

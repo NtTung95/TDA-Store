@@ -19,7 +19,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
     private static final String DELETE_CUSTOMER = "delete from customer where customerID = ?;";
     private static final String UPDATE_CUSTOMER = "update customer set userName = ?, password = ?, firstName = ?, surName = ?, birthDay = ?, phoneNumber=?, address = ?, email= ?, typeAccountID = ? where customerID = ?;";
     private static final String CHECK_LOGIN = "select * from customer where userName = ? and password = ?";
-    private static final int CHECK_ADMIN = 10001;
+    public static final int CHECK_ADMIN = 10001;
 
     @Override
     public void insertUser(Customer customer) throws SQLException {
@@ -222,13 +222,4 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
         }
         return typeAccounts;
     }
-
-    public boolean checkAdmin(Customer customer){
-        boolean isAdmin = false;
-        if(customer.getTypeAccountId() == CHECK_ADMIN){
-            isAdmin = true;
-        }
-        return isAdmin;
-    }
-
 }
