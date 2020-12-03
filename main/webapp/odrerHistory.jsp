@@ -1,4 +1,7 @@
-<%--
+<%@ page import="Model.Customer" %>
+<%@ page import="DAO.order.HistoryOrderDAO" %>
+<%@ page import="Model.HistoryOrders" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 02/12/2020
@@ -6,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,6 +113,11 @@
                 </a></li>
                 <%
                     String nameResult = (String) session.getAttribute("nameLogin");
+                    Customer customer = (Customer) session.getAttribute("loggedCustomer");
+                    int id = customer.getCustomerID();
+                    HistoryOrderDAO historyOrderDAO = new HistoryOrderDAO();
+                    ArrayList<HistoryOrders> list = historyOrderDAO.selectAllOrder(id);
+
                     String url = "/login";
                     String menu1 = "Login";
                     String urlMenu1 = "/login";
@@ -232,31 +241,21 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">OrderID</th>
+                        <th scope="col">Date Pay</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Pay</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    <c:forEach var="order" items="<%=list%>">
+                        <tr>
+                            <td><c:out value="${order.getIdOrder()}"/></td>
+                            <td><c:out value="${order.getDateOrdered()}"/></td>
+                            <td><c:out value="${order.getProductName()}"/></td>
+                            <td><c:out value="${order.getPrice()}"/></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
