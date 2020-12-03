@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CustomerServlet", urlPatterns = {"/admin/customer"})
+@WebServlet(name = "CustomerServlet", urlPatterns = "/admin/customer")
 public class CustomerServlet extends HttpServlet {
     private CustomerDAO customerDAO = new CustomerDAO();
 
@@ -26,13 +26,8 @@ public class CustomerServlet extends HttpServlet {
             action = "";
         }
         try {
-            switch (action) {
-                case "create":
-                    insertCustomer(request, response);
-                    break;
-                case "edit":
-                    updateCustomer(request, response);
-                    break;
+            if ("edit".equals(action)) {
+                updateCustomer(request, response);
             }
         } catch (IOException | SQLException ex) {
             throw new IOException(ex);
@@ -48,11 +43,7 @@ public class CustomerServlet extends HttpServlet {
         try {
             switch (action) {
                 case "login":
-//                    response.sendRedirect("login.jsp");
                     request.getRequestDispatcher("login.jsp").forward(request,response);
-                    break;
-                case "create":
-                    showNewForm(request, response);
                     break;
                 case "delete":
                     deleteCustomer(request, response);
@@ -86,29 +77,6 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void insertCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String firstName = request.getParameter("firstName");
-        String surName = request.getParameter("surName");
-        String birthDay = request.getParameter("birthDay");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String address = request.getParameter("address");
-        String email = request.getParameter("email");
-        int typeAccountId = 10002;
-
-        Customer newCustomer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId);
-        customerDAO.insertUser(newCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-        dispatcher.forward(request, response);
-    }
-
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<TypeAccount> typeAccounts = customerDAO.getTypeAccountList();
         request.setAttribute("typeAccountList", typeAccounts);
@@ -127,7 +95,7 @@ public class CustomerServlet extends HttpServlet {
 
         List<Customer> listCustomer = customerDAO.selectAllCustomer();
         request.setAttribute("listCustomer", listCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listCustomer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listCustomer.jsp");
         dispatcher.forward(request, response);
     }
 

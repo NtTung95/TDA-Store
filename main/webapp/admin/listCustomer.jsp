@@ -16,8 +16,38 @@
 </head>
 <body>
 <%--body--%>
-<div class="container-fluid">
-    <h1><a href="/homepage">Home</a></h1>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">LACOSTE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/product">Products</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Category
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <%--list category product--%>
+                        <c:forEach items='${requestScope["categoryList"]}'
+                                   var="category">
+                            <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                        </c:forEach>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 <div class="card mb-4">
     <div class="card-header">
@@ -77,119 +107,118 @@
                             </a>
                         </td>
                     </tr>
+                    <!-- Modal Edit Customer -->
+
+                        <div class="row justify-content-center">
+                            <div class="modal fade" id="editModal${customer.customerID}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <form method="post" action="/admin/customer">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="text-center modal-title" id="exampleModalLabel">Edit Customer</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1">Account</label>
+                                                        <input readonly class="form-control py-4" type="text"
+                                                               name="userName"
+                                                               value="${customer.username}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1">ID</label>
+                                                        <input readonly class="form-control py-4" type="text"
+                                                               name="customerID"
+                                                               value="${customer.customerID}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1">Password</label>
+                                                <input class="form-control py-4" type="password" name="password"
+                                                       value="${customer.password}"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="small mb-1">Email</label>
+                                                <input class="form-control py-4" type="email"
+                                                       aria-describedby="emailHelp"
+                                                       name="email"
+                                                       value="${customer.email}"/>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1">First Name</label>
+                                                        <input class="form-control py-4" type="text" name="firstName"
+                                                               value="${customer.firstname}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1">Sur Name</label>
+                                                        <input class="form-control py-4" type="text" name="surName"
+                                                               value="${customer.surname}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1">Address</label>
+                                                <input class="form-control py-4" type="text" name="address"
+                                                       value="${customer.address}"/>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1">Phone Number</label>
+                                                        <input class="form-control py-4" type="text" name="phoneNumber"
+                                                               value="${customer.phoneNumber}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1">Birthday</label>
+                                                        <input class="form-control py-4" type="date" name="birthDay"
+                                                               value="${customer.birthDay}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="small mb-1">Type Account</label>
+                                                <select class="form-control required" name="typeAccountId">
+                                                    <c:forEach items='${requestScope["typeAccountList"]}'
+                                                               var="typeAccountEdit">
+                                                        <option
+                                                                value="${typeAccountEdit.getTypeAccountId()}">${typeAccountEdit.getTypeOfAccount()}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="text" name="action" value="edit" hidden/>
+                                            <input type="submit" class="btn btn-primary" value="Save"/>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
-
-<!-- Modal Edit Customer -->
-<form method="post" action="/customer">
-    <div class="row justify-content-center">
-        <div class="modal fade" id="editModal${customer.customerID}" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="text-center modal-title" id="exampleModalLabel">Edit Customer</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label class="small mb-1">Account</label>
-                                    <input readonly class="form-control py-4" type="text"
-                                           name="userName"
-                                           value="${customer.username}"/>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="small mb-1">ID</label>
-                                    <input readonly class="form-control py-4" type="text"
-                                           name="customerID"
-                                           value="${customer.customerID}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="small mb-1">Password</label>
-                            <input class="form-control py-4" type="password" name="password"
-                                   value="${customer.password}"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="small mb-1">Email</label>
-                            <input class="form-control py-4" type="email"
-                                   aria-describedby="emailHelp"
-                                   name="email"
-                                   value="${customer.email}"/>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">First Name</label>
-                                    <input class="form-control py-4" type="text" name="firstName"
-                                           value="${customer.firstname}"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">Sur Name</label>
-                                    <input class="form-control py-4" type="text" name="surName"
-                                           value="${customer.surname}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="small mb-1">Address</label>
-                            <input class="form-control py-4" type="text" name="address"
-                                   value="${customer.address}"/>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">Phone Number</label>
-                                    <input class="form-control py-4" type="text" name="phoneNumber"
-                                           value="${customer.phoneNumber}"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="small mb-1">Birthday</label>
-                                    <input class="form-control py-4" type="date" name="birthDay"
-                                           value="${customer.birthDay}"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="small mb-1">Type Account</label>
-                            <select class="form-control required" name="typeAccountId">
-                                <c:forEach items='${requestScope["typeAccountList"]}'
-                                           var="typeAccountEdit">
-                                    <option
-                                            value="${typeAccountEdit.getTypeAccountId()}">${typeAccountEdit.getTypeOfAccount()}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="text" name="action" value="edit" hidden/>
-                        <input type="submit" class="btn btn-primary" value="Save"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
 
 
 <div id="layoutError_footer">

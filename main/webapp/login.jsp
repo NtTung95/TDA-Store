@@ -6,6 +6,7 @@ Time: 9:25 CH
 To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Login</title>
@@ -28,7 +29,7 @@ To change this template use File | Settings | File Templates.
                 <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="product.jsp">Products</a>
+                <a class="nav-link" href="/product">Products</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -36,20 +37,14 @@ To change this template use File | Settings | File Templates.
                     Category
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                <%--list category product--%>
+                    <c:forEach items='${requestScope["categoryList"]}'
+                               var="category">
+                        <a href="/product?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                    </c:forEach>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </div>
 </nav>
 
@@ -80,7 +75,7 @@ To change this template use File | Settings | File Templates.
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <div class="small"><a href="register.jsp">Need an account? Sign up!</a></div>
+                        <div class="small"><a href="/register">Need an account? Sign up!</a></div>
                     </div>
                 </div>
             </div>
