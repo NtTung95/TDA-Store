@@ -249,7 +249,14 @@
             <td><img id="blah5" class="imgPreviewTable" src="${product.getImgMain()}"
             /></td>
             <td><button class="btn btn-info" data-toggle="modal" data-target="#editModal${product.getProductId()}">Edit</button></td>
-            <td><button class="btn btn-danger">Delete</button></td>
+            <td><form action="/admin/product" method="post" id="formDelete">
+                <input type="text" name="action" value="delete" hidden>
+                <input type="text" name="idProduct" value="${product.getProductId()}" hidden>
+                <input type="submit" class="btn btn-danger" onclick="submitDelete()" value="delete">
+<%--                <button class="btn btn-danger" id="${product.getProductId()}" onclick="submitDelete()">Delete</button>--%>
+            </form>
+            </td>
+
             <!-- The Modal -->
             <div class="modal fade" id="editModal${product.getProductId()}">
                 <div class="modal-dialog modal-xl">
@@ -415,6 +422,7 @@
         });
     </script>
 </c:forEach>
+
         </tbody>
         <tfoot>
         <tr>
@@ -443,5 +451,27 @@
     } );
 </script>
 
+<script>
+    function submitDelete(){
+        $("#formDelete").submit();
+    }
+    // function getID(idProduct){
+    //     $.ajax({
+    //         url: '/admin/product?idProductDelete='+idProduct+'&action=delete',
+    //         data: {
+    //             format: 'json'
+    //         },
+    //         error: function() {
+    //             $('#info').html('<p>An error has occurred</p>');
+    //         },
+    //         dataType: 'jsonp',
+    //         success: function(data) {
+    //             alert("ok");
+    //         },
+    //         type: 'GET'
+    //     });
+    //     location.reload();
+    // }
+</script>
 </body>
 </html>

@@ -28,7 +28,10 @@ public class Product extends HttpServlet {
                 updateProduct(request, response);
                 break;
             case "add":
-                AddProduct(request,response);
+                AddProduct(request, response);
+                break;
+            case "delete":
+                DeleteProduct(request,response);
                 break;
         }
     }
@@ -103,9 +106,15 @@ public class Product extends HttpServlet {
         String SizeLProduct = request.getParameter("SizeLProduct");
         String SizeXLProduct = request.getParameter("SizeXLProduct");
         String SizeXXLProduct = request.getParameter("SizeXXLProduct");
-        boolean isValid = ProductDAO.addNewProduct(categoryProduct,quantityProduct,priceProduct,descriptionProduct,productName,imgMainProduct,img1Product,img2Product,img3Product,img4Product,SizeSProduct,SizeMProduct,SizeLProduct,SizeXLProduct,SizeXXLProduct);
+        boolean isValid = ProductDAO.addNewProduct(categoryProduct, quantityProduct, priceProduct, descriptionProduct, productName, imgMainProduct, img1Product, img2Product, img3Product, img4Product, SizeSProduct, SizeMProduct, SizeLProduct, SizeXLProduct, SizeXXLProduct);
         if (isValid) {
             response.sendRedirect("/admin/product");
         }
+    }
+
+    protected void DeleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String IdProduct = request.getParameter("idProduct");
+        ProductDAO.deleteProduct(Integer.parseInt(IdProduct));
+        response.sendRedirect("/admin/product");
     }
 }
