@@ -111,12 +111,14 @@
                     String nameResult = (String) session.getAttribute("nameLogin");
                     Customer customer = (Customer) session.getAttribute("loggedCustomer");
                     String pw = customer.getPassword();
-                    String fname = customer.getFirstname();
-                    String sname = customer.getSurname();
-                    String addr = customer.getAddress();
+                    String firstName = customer.getFirstname();
+                    String surname = customer.getSurname();
+                    String address = customer.getAddress();
                     String email = customer.getEmail();
-                    String birth = customer.getBirthDay();
+                    String birthDay = customer.getBirthDay();
                     String phone = customer.getPhoneNumber();
+                    int id = customer.getCustomerID();
+                    int typeAccountIdID = customer.getTypeAccountId() ;
 
                     String url = "/login";
                     String menu1 = "Login";
@@ -242,52 +244,63 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="small mb-1">Account</label>
-                                <input class="form-control py-4"value="  <%=nameResult%>" type="text" name="userName"  disabled/>
+                                <input class="form-control py-4" type="hidden" name="id" value="<%=id%>"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="small mb-1">Password</label>
-                                <input class="form-control py-4" type="password" name="password" value=" <%=pw%>" disabled />
+                                <input class="form-control py-4" type="hidden" name="typeAccountId" value="<%=typeAccountIdID%>" />
                             </div>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="small mb-1">Account</label>
+                                <input class="form-control py-4"value="<%=nameResult%>" type="text" name="userName"   />
+                            </div>
+                            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="small mb-1">Password</label>
+                                <input class="form-control py-4" type="password" name="password" value="<%=pw%>"   />
+                            </div>
+                        </div>
+                </div>
                     <div class="form-group">
                         <label class="small mb-1">Email</label>
-                        <input class="form-control py-4" value=" <%=email%>" type="email" aria-describedby="emailHelp" name="email"
-                           value=""    disabled />
+                        <input class="form-control py-4" value=" <%=email%>" type="email" aria-describedby="emailHelp" name="email"/>
                     </div>
 
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">First Name</label>
-                                <input class="form-control py-4" type="text" name="firstName"value=" <%=fname%>" />
+                                <input class="form-control py-4" type="text" name="firstName"value="<%=firstName%>" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Sur Name</label>
-                                <input class="form-control py-4" type="text" name="surName" value=" <%=sname%>" />
+                                <input class="form-control py-4" type="text" name="surname" value="<%=surname%>" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="small mb-1">Address</label>
-                        <input class="form-control py-4" type="text" name="address" value=" <%=addr%>" />
+                        <input class="form-control py-4" type="text" name="address" value="<%=address%>" />
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Phone Number</label>
-                                <input class="form-control py-4" type="text" name="phoneNumber" value=" <%=phone%>" />
+                                <input class="form-control py-4" type="text" name="phoneNumber" value="<%=phone%>" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Birthday</label>
-                                <input class="form-control py-4" type="text" name="birthDay" value=" <%=birth%>" />
+                                <input class="form-control py-4" type="text" name="birthDay" value="<%=birthDay%>" />
                             </div>
                         </div>
                     </div>
@@ -398,7 +411,7 @@
                         </form>
                     </li>
                     <li>
-                        <a href="#"> <img src="image/fb2.jfif" style="height: 50px"></a>
+                        <a href="#"> <img src="image/fb11.png" style="height: 50px"></a>
                         <a href="#"> <img src="image/in.png" style="height: 50px"></a>
                         <a href="#"> <img src="image/tw.png" style="height: 50px"></a>
                     </li>
