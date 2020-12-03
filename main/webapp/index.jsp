@@ -117,7 +117,7 @@
                         url = "#";
                         menu1 = "profile";
                         urlMenu1="#";
-                        menu2="logout";
+                        menu2="/inforcustomer";
                         urlMenu2= "/logout";
                     }
                 %>
