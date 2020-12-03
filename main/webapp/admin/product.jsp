@@ -75,10 +75,10 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="/admin/product" method="post" id="formSubmitAdd">
-<%--                            <div class="form-group col-sm-4 row1">--%>
-<%--                                <label for="">ProductId:</label>--%>
-<%--                                <input type="text" name="productId" id="idProduct" class="form-control">--%>
-<%--                            </div>--%>
+                            <div class="form-group col-sm-4 row1">
+                                <label for="">ProductId:</label>
+                                <input type="text" name="productId" id="idProduct" class="form-control" disabled readonly>
+                            </div>
                             <div class="form-group col-sm-4 row1">
                                 <label for="">Product Name:</label>
                                 <input type="text" name="productName" id="ProductName" class="form-control">
