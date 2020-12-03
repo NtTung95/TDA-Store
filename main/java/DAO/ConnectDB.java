@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ConnectDB {
-    public static String url = "jdbc:mysql://localhost/mikencobrand";
+    public static String url = "jdbc:mysql://localhost/casestudy";
     public static String USER_NAME = "root";
-    public static String PASSWORD = "123456";
+    public static String PASSWORD = "tuananhdeptrai";
     public static Connection connectionDB(){
         Connection connection = null;
         try {

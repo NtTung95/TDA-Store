@@ -261,10 +261,10 @@
                             </li>
 
                             <li>
-                                <p style="color: red">99.00$</p>
+                                <p style="color: red">${amout}</p>
                             </li>
                             <li>
-                                <p style="color: red;font-weight: bold">99.00$ </p>
+                                <p style="color: red;font-weight: bold">${amout} </p>
                             </li>
 
 
