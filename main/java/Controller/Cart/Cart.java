@@ -1,6 +1,7 @@
 package Controller.Cart;
 
 import DAO.ProductDAO;
+import Model.Category;
 import Model.Product;
 import Model.ProductCart;
 
@@ -17,6 +18,11 @@ public class Cart extends HttpServlet {
     public static ArrayList<ProductCart> listProductCart = new ArrayList<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ArrayList<Category> categories = ProductDAO.loadCategory();
+        request.setAttribute("categoryList", categories);
+
+
         String action = request.getParameter("action");
         switch (action) {
             case "add":
@@ -26,6 +32,10 @@ public class Cart extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ArrayList<Category> categories = ProductDAO.loadCategory();
+        request.setAttribute("categoryList", categories);
+
         request.setAttribute("listProductCart",listProductCart);
 request.getRequestDispatcher("cart.jsp").forward(request,response);
     }

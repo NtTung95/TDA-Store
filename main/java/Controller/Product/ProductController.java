@@ -21,15 +21,40 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Category> categories = ProductDAO.loadCategory();
         request.setAttribute("categoryList", categories);
-        String categoryId = request.getParameter("category");
+        String action = request.getParameter("action");
+        if (action == null){
+            action = "";
+        }
+        switch (action) {
+            case "search":
+                searchProduct(request,response);
+                break;
+            default:
+                resultProduct(request,response);
+                break;
+        }
 
-        if (categoryId == null){
+
+    }
+
+    protected void resultProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String categoryId = request.getParameter("category");
+        if (categoryId == null) {
             ArrayList<Product> products = ProductDAO.getProductInDb();
             request.setAttribute("listProduct", products);
             request.getRequestDispatcher("product.jsp").forward(request, response);
-        }else {
+        } else {
             ArrayList<Product> productsByCate = ProductDAO.getProductByCate(categoryId);
             request.setAttribute("listProduct", productsByCate);
+            request.getRequestDispatcher("product.jsp").forward(request, response);
+        }
+    }
+
+    protected void searchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String search = "%"+request.getParameter("search")+"%";
+        if (search != null){
+            ArrayList<Product> productsSearch = ProductDAO.findProduct(search);
+            request.setAttribute("listProduct", productsSearch);
             request.getRequestDispatcher("product.jsp").forward(request, response);
         }
     }

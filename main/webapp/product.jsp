@@ -93,8 +93,9 @@
         <div>
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0" method="get" action="/products">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <input  type="search" hidden name="action" value="search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
@@ -156,7 +157,7 @@
                    var="product">
             <div class="col-lg-2">
                 <div class="card" style="width: 14rem; border: 1px solid white">
-                    <a href="/productsDetail?productId=${product.getProductId()}"><img src="${product.getImgMain()}" style="max-height: 250px" class="card-img-top" a></a>
+                    <a href="/productDetail?productId=${product.getProductId()}"><img src="${product.getImgMain()}" style="max-height: 250px" class="card-img-top" a></a>
                     <div class="card-body">
                         <form action="/cart" id="formAddCart${product.getProductId()}" method="post">
                             <input type="text" name="action" value="add" hidden>
@@ -275,8 +276,8 @@
 
                 <ul class="list-unstyled">
                     <li>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/products">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>

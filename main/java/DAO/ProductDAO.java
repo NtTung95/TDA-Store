@@ -335,4 +335,63 @@ public class ProductDAO {
         }
         return productsList;
     }
+    public static ArrayList<Product> findProduct(String keyWord) {
+        Connection conn = null;
+        ArrayList<Product> productsList = new ArrayList<>();
+
+        try {
+            conn = DAO.ConnectDB.connectionDB();
+            String query = "SELECT * FROM product WHERE productName LIKE ?";
+            Statement stmt = null;
+            try {
+                PreparedStatement pre = conn.prepareStatement(query);
+                pre.setString(1, keyWord);
+                ResultSet rs = pre.executeQuery();
+
+                while (rs.next()) {
+                    Product product = new Product();
+                    product.setProductId(rs.getInt("productId"));
+                    product.setCategoryId(rs.getInt("categoryId"));
+                    product.setQuantity(rs.getInt("quantity"));
+                    product.setPrice(rs.getInt("price"));
+                    product.setDescription(rs.getString("description"));
+                    product.setProductName(rs.getString("productName"));
+                    product.setImgMain(rs.getString("imgMain"));
+                    product.setImg1(rs.getString("img1"));
+                    product.setImg2(rs.getString("img2"));
+                    product.setImg3(rs.getString("img3"));
+                    product.setImg4(rs.getString("img4"));
+                    product.setSize_S(rs.getInt("Size_S"));
+                    product.setSize_M(rs.getInt("Size_M"));
+                    product.setSize_L(rs.getInt("Size_L"));
+                    product.setSize_XL(rs.getInt("Size_XL"));
+                    product.setSize_XXL(rs.getInt("Size_XXL"));
+                    productsList.add(product);
+                }
+
+
+//                while (rs.next()) {
+//                    String name = rs.getString("username");
+//                    System.out.println(name);
+//                }
+            } catch (SQLException e) {
+                throw new Error("Problem", e);
+            } finally {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+        } catch (SQLException e) {
+            throw new Error("Problem", e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return productsList;
+    }
 }
