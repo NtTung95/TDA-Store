@@ -177,6 +177,7 @@ public class CustomerDAO implements DAO.customer.ICustomerDAO {
                 if (rs.next()) {
                     customer.setUsername(rs.getString("username"));
                     customer.setFirstname(rs.getString("firstName"));
+                    customer.setEmail(rs.getString("email"));
                     customer.setAddress(rs.getString("address"));
                     customer.setBirthDay(rs.getString("birthDay"));
                     customer.setCustomerID(Integer.parseInt(rs.getString("customerID")));
