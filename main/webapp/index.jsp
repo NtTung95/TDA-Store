@@ -116,8 +116,8 @@
                     }else {
                         url = "#";
                         menu1 = "profile";
-                        urlMenu1="#";
-                        menu2="/inforcustomer";
+                        urlMenu1="/inforcustomer";
+                        menu2="logout";
                         urlMenu2= "/logout";
                     }
                 %>
