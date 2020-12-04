@@ -60,8 +60,9 @@
         <div>
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0" method="get" action="/products">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <input  type="search" hidden name="action" value="search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
@@ -307,9 +308,9 @@
 
                 <ul class="list-unstyled">
                     <li>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                                   aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="get" action="/products">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                            <input  type="search" hidden name="action" value="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
