@@ -16,7 +16,8 @@ import java.util.ArrayList;
 @WebServlet(name = "Cart", urlPatterns = "/cart")
 public class Cart extends HttpServlet {
     public static ArrayList<ProductCart> listProductCart = new ArrayList<>();
-    double Amout=0;
+    double Amout = 0;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ArrayList<Category> categories = ProductDAO.loadCategory();
@@ -28,6 +29,9 @@ public class Cart extends HttpServlet {
             case "add":
                 addToCart(request, response);
                 break;
+            case "delete":
+                deleteProductCart(request,response);
+                break;
         }
     }
 
@@ -36,21 +40,33 @@ public class Cart extends HttpServlet {
         ArrayList<Category> categories = ProductDAO.loadCategory();
         request.setAttribute("categoryList", categories);
 
-        request.setAttribute("listProductCart",listProductCart);
-        request.setAttribute("amout",Amout);
-request.getRequestDispatcher("cart.jsp").forward(request,response);
+        request.setAttribute("listProductCart", listProductCart);
+        request.setAttribute("amout", Amout);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idProduct = request.getParameter("IdProduct");
         int amoutSelect = Integer.parseInt(request.getParameter("amoutSelect"));
         String sizeColor = request.getParameter("sizeSelect");
-            ProductCart productCart = ProductDAO.getProductDetailCart(idProduct,sizeColor,amoutSelect);
+        ProductCart productCart = ProductDAO.getProductDetailCart(idProduct, sizeColor, amoutSelect);
         listProductCart.add(productCart);
 
-         Amout=0;
-        for (ProductCart productCartPrice:listProductCart) {
+        Amout = 0;
+        for (ProductCart productCartPrice : listProductCart) {
             Amout = productCartPrice.getPrice() + Amout;
+        }
+        response.sendRedirect("/cart");
+    }
+
+    protected void deleteProductCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idProductCart = Integer.parseInt(request.getParameter("idProductCart"));
+        for (ProductCart productCart : listProductCart) {
+            if (productCart.getProductId() == idProductCart) {
+                listProductCart.remove(productCart);
+                Amout = Amout - productCart.getPrice();
+                break;
+            }
         }
         response.sendRedirect("/cart");
     }
