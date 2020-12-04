@@ -1,3 +1,4 @@
+<%@ page import="DAO.customer.CustomerDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,11 +34,11 @@
                                         <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
                                     </c:forEach>
 
-<%--                                    <a href="#">Shirt</a>--%>
-<%--                                    <a href="#">Coat</a>--%>
-<%--                                    <a href="#">Shorts</a>--%>
-<%--                                    <a href="#">Jeans</a>--%>
-<%--                                    <a href="#">Pants</a>--%>
+                                    <%--                                    <a href="#">Shirt</a>--%>
+                                    <%--                                    <a href="#">Coat</a>--%>
+                                    <%--                                    <a href="#">Shorts</a>--%>
+                                    <%--                                    <a href="#">Jeans</a>--%>
+                                    <%--                                    <a href="#">Pants</a>--%>
 
                                 </li>
                                 <li>
@@ -48,7 +49,32 @@
                         </div>
                     </div>
                 </li>
+                <%
+                    String displayManagement;
+                    if (session.getAttribute("nullCustomer") == null) {
+                        displayManagement = "none";
+                    } else {
+                        if ((int) session.getAttribute("typeOfId") == CustomerDAO.CHECK_ADMIN) {
+                            displayManagement = "block";
+                        } else {
+                            displayManagement = "none";
+                        }
+                    }
+                %>
 
+                <li class="nav-item" style="display:<%=displayManagement%>">
+                    <div class="dropdown">
+                        <a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="/admin/customer">User Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/product">Product Management
+                            </a>
+                        </div>
+                    </div>
+                </li>
 
                 <a class="navbar-brand" href="#" style="position:absolute ; left:635px "><img src="image/images.png"
                                                                                               style="height: 40px"></a>
@@ -58,8 +84,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                        <input  type="search" hidden name="action" value="search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                               name="search">
+                        <input type="search" hidden name="action" value="search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
@@ -79,12 +106,12 @@
                     String urlMenu2 = "/register";
                     if (nameResult == null) {
                         nameResult = "Login";
-                    }else {
+                    } else {
                         url = "#";
                         menu1 = "profile";
-                        urlMenu1="/inforcustomer";
-                        menu2="logout";
-                        urlMenu2= "/logout";
+                        urlMenu1 = "/inforcustomer";
+                        menu2 = "logout";
+                        urlMenu2 = "/logout";
                     }
                 %>
                 <li class="nav-item active">
@@ -99,9 +126,11 @@
                         </a>
 
                         <div class="dropdown-content" style="height: auto; width: auto">
-                            <a href="<%=urlMenu1%>"><%=menu1%></a>
-                            <a href="<%=urlMenu2%>"><%=menu2%></a>
-<%--                            <a href="#">Link 3</a>--%>
+                            <a href="<%=urlMenu1%>"><%=menu1%>
+                            </a>
+                            <a href="<%=urlMenu2%>"><%=menu2%>
+                            </a>
+                            <%--                            <a href="#">Link 3</a>--%>
 
                         </div>
                     </div>
@@ -114,8 +143,7 @@
 </nav>
 <div class="container-fluid" style="padding-top: 100px">
     <div class="row">
-        <div>
-
+        <div class="container-fluid">
             <img src="image/1.jpg" style="width: 100%;">
         </div>
     </div>
@@ -216,8 +244,9 @@
                 <ul class="list-unstyled">
                     <li>
                         <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                            <input  type="search" hidden name="action" value="search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                   name="search">
+                            <input type="search" hidden name="action" value="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
