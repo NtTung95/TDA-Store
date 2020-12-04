@@ -23,11 +23,11 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav" style="">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn">Male</a>
+                        <a href="/products" class="nav-link dropbtn">Product</a>
                         <div class="dropdown-content">
                             <ul>
                                 <li>
@@ -51,43 +51,8 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link dropbtn">Female</a>
-                        <div class="dropdown-content  ">
-                            <ul>
-                                <li>
-                                    <c:forEach items='${requestScope["categoryList"]}'
-                                               var="category">
-                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                                    </c:forEach>
-                                    <%--                                    <a href="#">T-shirt</a>--%>
-                                    <%--                                    <a href="#">Shirt</a>--%>
-                                    <%--                                    <a href="#">Coat</a>--%>
-                                    <%--                                    <a href="#">Dresses</a>--%>
-                                    <%--                                    <a href="#">Shorts</a>--%>
-                                    <%--                                    <a href="#">Jeans</a>--%>
-                                    <%--                                    <a href="#">Pants</a>--%>
-                                </li>
-                                <li>
-                                    <img src="image/female.jpg"
-                                         style="height: 400px ;position:absolute;top: 0px;left: 500px">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class=" dropdown">
-                        <a class="nav-link dropbtn">Sale</a>
-                        <div class="dropdown-content" style="width: auto;height: auto">
 
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                            <%--                            <a href="#">Link 3</a>--%>
-                        </div>
-                    </div>
-                </li>
+
                 <a class="navbar-brand" href="#" style="position:absolute ; left:635px "><img src="image/images.png"
                                                                                               style="height: 40px"></a>
             </ul>
@@ -116,12 +81,12 @@
                     String urlMenu2 = "/register";
                     if (nameResult == null) {
                         nameResult = "Login";
-                    } else {
+                    }else {
                         url = "#";
                         menu1 = "profile";
-                        urlMenu1 = "#";
-                        menu2 = "logout";
-                        urlMenu2 = "/logout";
+                        urlMenu1="/inforcustomer";
+                        menu2="logout";
+                        urlMenu2= "/logout";
                     }
                 %>
                 <li class="nav-item active">
@@ -136,10 +101,8 @@
                         </a>
 
                         <div class="dropdown-content" style="height: auto; width: auto">
-                            <a href="<%=urlMenu1%>"><%=menu1%>
-                            </a>
-                            <a href="<%=urlMenu2%>"><%=menu2%>
-                            </a>
+                            <a href="<%=urlMenu1%>"><%=menu1%></a>
+                            <a href="<%=urlMenu2%>"><%=menu2%></a>
                             <%--                            <a href="#">Link 3</a>--%>
 
                         </div>

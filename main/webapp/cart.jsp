@@ -25,11 +25,11 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav" style="">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn">Male</a>
+                        <a href="/products" class="nav-link dropbtn">Product</a>
                         <div class="dropdown-content">
                             <ul>
                                 <li>
@@ -53,43 +53,8 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="nav-link dropbtn">Female</a>
-                        <div class="dropdown-content  ">
-                            <ul>
-                                <li>
-                                    <c:forEach items='${requestScope["categoryList"]}'
-                                               var="category">
-                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                                    </c:forEach>
-                                    <%--                                    <a href="#">T-shirt</a>--%>
-                                    <%--                                    <a href="#">Shirt</a>--%>
-                                    <%--                                    <a href="#">Coat</a>--%>
-                                    <%--                                    <a href="#">Dresses</a>--%>
-                                    <%--                                    <a href="#">Shorts</a>--%>
-                                    <%--                                    <a href="#">Jeans</a>--%>
-                                    <%--                                    <a href="#">Pants</a>--%>
-                                </li>
-                                <li>
-                                    <img src="image/female.jpg"
-                                         style="height: 400px ;position:absolute;top: 0px;left: 500px">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class=" dropdown">
-                        <a class="nav-link dropbtn">Sale</a>
-                        <div class="dropdown-content" style="width: auto;height: auto">
 
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                            <%--                            <a href="#">Link 3</a>--%>
-                        </div>
-                    </div>
-                </li>
+
                 <a class="navbar-brand" href="#" style="position:absolute ; left:635px "><img src="image/images.png"
                                                                                               style="height: 40px"></a>
             </ul>
@@ -121,7 +86,7 @@
                     }else {
                         url = "#";
                         menu1 = "profile";
-                        urlMenu1="#";
+                        urlMenu1="/inforcustomer";
                         menu2="logout";
                         urlMenu2= "/logout";
                     }
@@ -171,9 +136,12 @@
 
                                 <li>
                                     <div class="btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-secondary active">
-                                            <input type="checkbox" checked> Delete
-                                        </label>
+                                        <form action="/cart" method="post">
+                                            <input type="text" value="delete" name="action" hidden>
+                                            <input type="text" value="${productCart.getProductId()}"
+                                                   name="idProductCart" hidden>
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </form>
                                     </div>
                                 </li>
 
@@ -185,7 +153,8 @@
                         <div class="col-md-4">
 
                             <!-- Links -->
-                            <a style="font-size: medium;font-weight: bold" href="#" class="text-uppercase">${productCart.getProductName()}</a>
+                            <a style="font-size: medium;font-weight: bold" href="#"
+                               class="text-uppercase">${productCart.getProductName()}</a>
 
                             <ul class="list-unstyled">
                                 <li>
@@ -198,7 +167,8 @@
                                         <input class="number-input" type="number" id="para2" style="background-color: white;
                  border-width: 1px; border-style: solid; border-color: lightblue slateblue lightblue hotpink;
                   border-image: initial; color: black; text-align: center;
-                 width: 55px; font-size: 18px; line-height: normal; padding: 0px; outline: none;" value="${productCart.getAmoutSelect()}">
+                 width: 55px; font-size: 18px; line-height: normal; padding: 0px; outline: none;"
+                                               value="${productCart.getAmoutSelect()}">
 
                                     </div>
                                 </li>
@@ -216,7 +186,8 @@
                                     <a href="#!" style="font-size: small">
                                         - Khách trả thẳng: Tặng thêm Phiếu mua hàng 500.000đ
                                         <br>
-                                        - Khách trả góp: Trả góp 0% trên giá 8.190.000, Tặng Phiếu mua hàng 200.000đ trừ vào
+                                        - Khách trả góp: Trả góp 0% trên giá 8.190.000, Tặng Phiếu mua hàng 200.000đ trừ
+                                        vào
                                         tiền trả trước
 
                                     </a></li>
