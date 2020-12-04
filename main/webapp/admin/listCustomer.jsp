@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<%--body--%>
+
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="/homepage"><h3>LACOSTE</h3></a>

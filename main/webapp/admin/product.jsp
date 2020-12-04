@@ -50,9 +50,64 @@
 
 </head>
 <body>
-<div id="header">
 
+<%--navbar--%>
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/homepage"><h3>LACOSTE</h3></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/homepage">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/customer">User Management</a>
+                </li>
+
+                <%
+                    String nameResult = (String) session.getAttribute("nameLogin");
+                    String url = "/login";
+                    String menu1 = "Login";
+                    String urlMenu1 = "/login";
+                    String menu2 = "Register";
+                    String urlMenu2 = "/register";
+                    if (nameResult == null) {
+                        nameResult = "Login";
+                    } else {
+                        url = "#";
+                        menu1 = "profile";
+                        urlMenu1 = "/inforcustomer";
+                        menu2 = "logout";
+                        urlMenu2 = "/logout";
+                    }
+                %>
+                <li class="nav-item active">
+                    <div class="dropdown">
+                        <a class="nav-link dropbtn" href="<%=url%>" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            <%=nameResult%>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="<%=urlMenu1%>"><%=menu1%>
+                            </a>
+                            <a class="dropdown-item" href="<%=urlMenu2%>"><%=menu2%>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
+
+
 <div class="container-fluid">
 
     <div class="tableProduct">
