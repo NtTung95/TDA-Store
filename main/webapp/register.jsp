@@ -42,6 +42,7 @@
                 <div class="card-body">
                     <form method="post" action="/register">
                         <p6 id="emailHelp" class="text-danger">${registerError}</p6>
+                        <p6 id="emailHelp" class="text-success">${registerSuccess}</p6>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">

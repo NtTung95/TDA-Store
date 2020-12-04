@@ -40,6 +40,7 @@ public class RegisterServlet extends HttpServlet {
             Customer newCustomer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber, address, email, typeAccountId);
             try {
                 customerDAO.insertUser(newCustomer);
+                request.setAttribute("registerSuccess","Account registration is successful !");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
                 dispatcher.forward(request, response);
             } catch (SQLException throwables) {
