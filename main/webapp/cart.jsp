@@ -240,19 +240,18 @@
 
                 </div>
                 <div class="row" style="background: white!important;">
-                    <li>
+                    <a href="/checkout" class="btn btn-primary">Check out</a>
 
                 </div>
 
 
             </div>
-
         </div>
     </div>
 </div>
 <div>
     <div class="row" style="height: 150px">
-
+b
     </div>
 </div>
 

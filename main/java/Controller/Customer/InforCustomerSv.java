@@ -88,9 +88,9 @@ public class InforCustomerSv extends HttpServlet {
     public void readHistoryOrder(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("loggedCustomer");
-        int id = customer.getCustomerID();
+        int idCustomer = customer.getCustomerID();
         HistoryOrderDAO historyOrderDAO = new HistoryOrderDAO();
-        ArrayList<Order> orderDetailResults = OrdersDAO.getOrdersInDb();
+        ArrayList<Order> orderDetailResults = OrdersDAO.getOrdersInDbById(idCustomer);
         request.setAttribute("historyOrder",orderDetailResults);
         try {
             request.getRequestDispatcher("odrerHistory.jsp").forward(request, response);
