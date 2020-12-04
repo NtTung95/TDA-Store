@@ -33,14 +33,19 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         int typeAccountId = 10002;
 
-        Customer newCustomer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber,address,email,typeAccountId);
-
-        try {
-            customerDAO.insertUser(newCustomer);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-            dispatcher.forward(request, response);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        if(userName.equals("") || password.equals("") || firstName.equals("")|| surName.equals("")|| birthDay.equals("") || phoneNumber.equals("") || address.equals("")|| email.equals("")){
+            request.setAttribute("registerError","*Please enter your complete information!");
+            request.getRequestDispatcher("register.jsp").forward(request,response);
+        }else {
+            Customer newCustomer = new Customer(userName, password, firstName, surName, birthDay, phoneNumber, address, email, typeAccountId);
+            try {
+                customerDAO.insertUser(newCustomer);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+                dispatcher.forward(request, response);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
+
     }
 }
