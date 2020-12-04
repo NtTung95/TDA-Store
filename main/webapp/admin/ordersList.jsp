@@ -2,14 +2,12 @@
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <title>Title</title>
+    <title>Order Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-    <title>Product</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -69,9 +67,20 @@
                     <a class="nav-link" href="/products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/customer">User Management</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropbtn" href="#" id="managementDropdown" role="button" data-toggle="dropdown">
+                            Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="managementDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="/admin/customer">User Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/product">Product Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/orders">Oder Management
+                            </a>
+                        </div>
+                    </div>
                 </li>
-
                 <%
                     String nameResult = (String) session.getAttribute("nameLogin");
                     String url = "/login";
