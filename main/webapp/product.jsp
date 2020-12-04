@@ -66,6 +66,8 @@
                             </a>
                             <a class="dropdown-item" href="/admin/product">Product Management
                             </a>
+                            <a class="dropdown-item" href="/admin/orders">Order Management
+                            </a>
                         </div>
                     </div>
                 </li>
