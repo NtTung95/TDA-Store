@@ -67,7 +67,19 @@
                     <a class="nav-link" href="/products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/customer">User Management</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropbtn" href="#" id="managementDropdown" role="button" data-toggle="dropdown">
+                            Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="managementDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="/admin/customer">User Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/product">Product Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/orders">Oder Management
+                            </a>
+                        </div>
+                    </div>
                 </li>
 
                 <%
