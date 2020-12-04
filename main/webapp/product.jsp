@@ -1,3 +1,4 @@
+<%@ page import="DAO.customer.CustomerDAO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,85 +22,68 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav" style="">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/homepage">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn">Male</a>
+                        <a href="/products" class="nav-link dropbtn">Product</a>
                         <div class="dropdown-content">
                             <ul>
-                                <li>
-                                    <c:forEach items='${requestScope["categoryList"]}'
-                                               var="category">
-                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                                    </c:forEach>
+                                <c:forEach items='${requestScope["categoryList"]}'
+                                           var="category">
+                                    <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                                </c:forEach>
 
-                                    <%--                                    <a href="#">Shirt</a>--%>
-                                    <%--                                    <a href="#">Coat</a>--%>
-                                    <%--                                    <a href="#">Shorts</a>--%>
-                                    <%--                                    <a href="#">Jeans</a>--%>
-                                    <%--                                    <a href="#">Pants</a>--%>
 
-                                </li>
-                                <li>
-                                    <img src="image/male.jpg"
-                                         style="height: 400px ;position:absolute;top: 0px;left: 450px">
-                                </li>
+
+                                <img src="image/male.jpg"
+                                     style="height: 400px ;position:absolute;top: 0px;left: 450px">
+
                             </ul>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
+                <%
+                    String displayManagement;
+                    if (session.getAttribute("nullCustomer") == null) {
+                        displayManagement = "none";
+                    } else {
+                        if ((int) session.getAttribute("typeOfId") == CustomerDAO.CHECK_ADMIN) {
+                            displayManagement = "block";
+                        } else {
+                            displayManagement = "none";
+                        }
+                    }
+                %>
+
+                <li class="nav-item" style="display:<%=displayManagement%>">
                     <div class="dropdown">
-                        <a class="nav-link dropbtn">Female</a>
-                        <div class="dropdown-content  ">
-                            <ul>
-                                <li>
-                                    <c:forEach items='${requestScope["categoryList"]}'
-                                               var="category">
-                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                                    </c:forEach>
-                                    <%--                                    <a href="#">T-shirt</a>--%>
-                                    <%--                                    <a href="#">Shirt</a>--%>
-                                    <%--                                    <a href="#">Coat</a>--%>
-                                    <%--                                    <a href="#">Dresses</a>--%>
-                                    <%--                                    <a href="#">Shorts</a>--%>
-                                    <%--                                    <a href="#">Jeans</a>--%>
-                                    <%--                                    <a href="#">Pants</a>--%>
-                                </li>
-                                <li>
-                                    <img src="image/female.jpg"
-                                         style="height: 400px ;position:absolute;top: 0px;left: 500px">
-                                </li>
-                            </ul>
+                        <a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="/admin/customer">User Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/product">Product Management
+                            </a>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <div class=" dropdown">
-                        <a class="nav-link dropbtn">Sale</a>
-                        <div class="dropdown-content" style="width: auto;height: auto">
 
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                            <%--                            <a href="#">Link 3</a>--%>
-                        </div>
-                    </div>
-                </li>
-                <a class="navbar-brand" href="#" style="position:absolute ; left:635px "><img src="image/images.png"
-                                                                                              style="height: 40px"></a>
+                <a class="navbar-brand" href="/homepage" style="position:absolute ; left:600px "><img src="image/Logo-TDA.png" style="height: 40px"></a>
             </ul>
         </div>
         <div>
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                        <input  type="search" hidden name="action" value="search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                               name="search">
+                        <input type="search" hidden name="action" value="search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
-                <li class="nav-item active"><a class="nav-link" href="#">
+                <li class="nav-item active"><a class="nav-link" href="/cart">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-check-fill" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -115,12 +99,12 @@
                     String urlMenu2 = "/register";
                     if (nameResult == null) {
                         nameResult = "Login";
-                    }else {
+                    } else {
                         url = "#";
                         menu1 = "profile";
-                        urlMenu1="#";
-                        menu2="logout";
-                        urlMenu2= "/logout";
+                        urlMenu1 = "/inforcustomer";
+                        menu2 = "logout";
+                        urlMenu2 = "/logout";
                     }
                 %>
                 <li class="nav-item active">
@@ -135,8 +119,10 @@
                         </a>
 
                         <div class="dropdown-content" style="height: auto; width: auto">
-                            <a href="<%=urlMenu1%>"><%=menu1%></a>
-                            <a href="<%=urlMenu2%>"><%=menu2%></a>
+                            <a href="<%=urlMenu1%>"><%=menu1%>
+                            </a>
+                            <a href="<%=urlMenu2%>"><%=menu2%>
+                            </a>
                             <%--                            <a href="#">Link 3</a>--%>
 
                         </div>
