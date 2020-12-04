@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute("nullCustomer",customer);
         if(us.checkLogin(username,password)) {
             session.setAttribute("loggedCustomer", customer);
+            session.setAttribute("idCustomer", customer.getCustomerID());
             session.setAttribute("nameLogin",username);
             session.setAttribute("typeOfId",customer.getTypeAccountId());
             response.sendRedirect("/homepage");

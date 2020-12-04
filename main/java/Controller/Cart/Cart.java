@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @WebServlet(name = "Cart", urlPatterns = "/cart")
 public class Cart extends HttpServlet {
     public static ArrayList<ProductCart> listProductCart = new ArrayList<>();
-    double Amout = 0;
+    public static double Amout = 0;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

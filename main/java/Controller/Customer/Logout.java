@@ -19,6 +19,7 @@ public class Logout extends HttpServlet {
         session.removeAttribute("nameLogin");
         session.removeAttribute("typeOfId");
         session.removeAttribute("loggedCustomer");
+        session.removeAttribute("idCustomer");
         session.setAttribute("nullCustomer",null);
 
 

@@ -248,24 +248,25 @@
                 <div class="row" style="background: white!important;">
                     <li>
                         <form>
-                            <div class="form-group">
-                                <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName" placeholder="(*)">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPhone">Number Phone</label>
-                                <input type="text" class="form-control" id="inputPhone" placeholder="(*)">
-                            </div>
+<%--                            <div class="form-group">--%>
+<%--                                <label for="inputName">Name</label>--%>
+<%--                                <input type="text" class="form-control" id="inputName" placeholder="(*)">--%>
+<%--                            </div>--%>
+<%--                            <div class="form-group">--%>
+<%--                                <label for="inputPhone">Number Phone</label>--%>
+<%--                                <input type="text" class="form-control" id="inputPhone" placeholder="(*)">--%>
+<%--                            </div>--%>
 
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Check me out
-                                    </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">---->PAY<-----</button>
+<%--                            <div class="form-group">--%>
+<%--                                <div class="form-check">--%>
+<%--                                    <input class="form-check-input" type="checkbox" id="gridCheck">--%>
+<%--                                    <label class="form-check-label" for="gridCheck">--%>
+<%--                                        Check me out--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+                            <a href="/checkout"><button type="button" class="btn btn-primary">---->Checkout<-----</button>
+                            </a>
                         </form>
                 </div>
 
