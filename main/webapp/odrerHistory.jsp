@@ -113,11 +113,6 @@
                 </a></li>
                 <%
                     String nameResult = (String) session.getAttribute("nameLogin");
-                    Customer customer = (Customer) session.getAttribute("loggedCustomer");
-                    int id = customer.getCustomerID();
-                    HistoryOrderDAO historyOrderDAO = new HistoryOrderDAO();
-                    ArrayList<HistoryOrders> list = historyOrderDAO.selectAllOrder(id);
-
                     String url = "/login";
                     String menu1 = "Login";
                     String urlMenu1 = "/login";
@@ -248,7 +243,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="order" items="<%=list%>">
+                    <c:forEach var="order" items="${historyOrder}">
                         <tr>
                             <td><c:out value="${order.getIdOrder()}"/></td>
                             <td><c:out value="${order.getDateOrdered()}"/></td>

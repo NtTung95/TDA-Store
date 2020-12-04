@@ -1,7 +1,9 @@
 package Controller.Customer;
 
 import DAO.customer.CustomerDAO;
+import DAO.order.HistoryOrderDAO;
 import Model.Customer;
+import Model.HistoryOrders;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet(urlPatterns = {"/inforcustomer"})
 public class InforCustomer extends HttpServlet {
@@ -32,18 +36,14 @@ public class InforCustomer extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
-            request.getRequestDispatcher("inforCustomer.jsp").forward(request, response);
+            readInfor(request,response);
         } else {
             switch (action) {
                 case "oder":
-                    request.getRequestDispatcher("odrerHistory.jsp").forward(request, response);
+                  readHistoryOrder(request,response);
                     break;
                 case "infor":
-                    request.getRequestDispatcher("inforCustomer.jsp").forward(request, response);
-                    break;
-                default:
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-
+                    readInfor(request, response);
             }
         }
     }
@@ -69,4 +69,33 @@ public class InforCustomer extends HttpServlet {
         }
 
     }
+
+    public void readInfor(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("loggedCustomer");
+        request.setAttribute("customer", customer);
+        try {
+            request.getRequestDispatcher("inforCustomer.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void readHistoryOrder(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("loggedCustomer");
+        int id = customer.getCustomerID();
+        HistoryOrderDAO historyOrderDAO = new HistoryOrderDAO();
+        ArrayList<HistoryOrders> list = historyOrderDAO.selectAllOrder(id);
+        request.setAttribute("historyOrder",list);
+        try {
+            request.getRequestDispatcher("odrerHistory.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

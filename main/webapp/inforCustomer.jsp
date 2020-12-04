@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="Model.Customer" %><%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -109,16 +110,6 @@
                 </a></li>
                 <%
                     String nameResult = (String) session.getAttribute("nameLogin");
-                    Customer customer = (Customer) session.getAttribute("loggedCustomer");
-                    String pw = customer.getPassword();
-                    String firstName = customer.getFirstname();
-                    String surname = customer.getSurname();
-                    String address = customer.getAddress();
-                    String email = customer.getEmail();
-                    String birthDay = customer.getBirthDay();
-                    String phone = customer.getPhoneNumber();
-                    int id = customer.getCustomerID();
-                    int typeAccountIdID = customer.getTypeAccountId() ;
 
                     String url = "/login";
                     String menu1 = "Login";
@@ -181,7 +172,7 @@
             <a>Account information</a>
         </div>
 
-
+<
     </div>
     <div class="row">
         <div class="col-lg-1">
@@ -244,63 +235,64 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control py-4" type="hidden" name="id" value="<%=id%>"/>
+                                <input class="form-control py-4" type="hidden" name="id" value="${customer.getCustomerID()}"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control py-4" type="hidden" name="typeAccountId" value="<%=typeAccountIdID%>" />
+                                <input class="form-control py-4" type="hidden" name="typeAccountId"  value="${customer.getTypeAccountId()}" />
                             </div>
                         </div>
                     </div>
+
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Account</label>
-                                <input class="form-control py-4"value="<%=nameResult%>" type="text" name="userName"   />
+                                <input class="form-control py-4"value="${customer.getUsername()}" type="text" name="userName"   />
                             </div>
                             </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Password</label>
-                                <input class="form-control py-4" type="password" name="password" value="<%=pw%>"   />
+                                <input class="form-control py-4" type="password" name="password" value="${customer.getPassword()}"   />
                             </div>
                         </div>
                 </div>
                     <div class="form-group">
                         <label class="small mb-1">Email</label>
-                        <input class="form-control py-4" value=" <%=email%>" type="email" aria-describedby="emailHelp" name="email"/>
+                        <input class="form-control py-4" value="${customer.getEmail()}" type="email" aria-describedby="emailHelp" name="email"/>
                     </div>
 
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">First Name</label>
-                                <input class="form-control py-4" type="text" name="firstName"value="<%=firstName%>" />
+                                <input class="form-control py-4" type="text" name="firstName"value="${ customer.getFirstname()}" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Sur Name</label>
-                                <input class="form-control py-4" type="text" name="surname" value="<%=surname%>" />
+                                <input class="form-control py-4" type="text" name="surname" value="${customer.getSurname()}" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="small mb-1">Address</label>
-                        <input class="form-control py-4" type="text" name="address" value="<%=address%>" />
+                        <input class="form-control py-4" type="text" name="address" value="${customer.getAddress()}" />
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Phone Number</label>
-                                <input class="form-control py-4" type="text" name="phoneNumber" value="<%=phone%>" />
+                                <input class="form-control py-4" type="text" name="phoneNumber" value="${customer.getPhoneNumber()}" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1">Birthday</label>
-                                <input class="form-control py-4" type="text" name="birthDay" value="<%=birthDay%>" />
+                                <input class="form-control py-4" type="text" name="birthDay" value="${customer.getBirthDay()}" />
                             </div>
                         </div>
                     </div>
