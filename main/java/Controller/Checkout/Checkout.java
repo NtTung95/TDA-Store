@@ -34,6 +34,7 @@ public class Checkout extends HttpServlet {
             CheckoutDAO.insertOrders(listProductCart, idCustomer);
             listProductCart = new ArrayList<>();
             Amout = 0;
+            request.getRequestDispatcher("/paymentOk.jsp").forward(request,response);
         }
     }
 }

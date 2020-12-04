@@ -26,7 +26,7 @@
                 <li class="nav-item">
                     <div class="dropdown">
                         <a href="/products" class="nav-link dropbtn">Product</a>
-                        <div class="dropdown-content">
+                        <div class="dropdown-content" style="height: auto">
                             <ul>
                                     <c:forEach items='${requestScope["categoryList"]}'
                                                var="category">
