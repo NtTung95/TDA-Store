@@ -38,12 +38,6 @@
                                         <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
                                     </c:forEach>
 
-                                    <%--                                    <a href="#">Shirt</a>--%>
-                                    <%--                                    <a href="#">Coat</a>--%>
-                                    <%--                                    <a href="#">Shorts</a>--%>
-                                    <%--                                    <a href="#">Jeans</a>--%>
-                                    <%--                                    <a href="#">Pants</a>--%>
-
                                 </li>
                                 <li>
                                     <img src="image/male.jpg"
@@ -247,27 +241,7 @@
                 </div>
                 <div class="row" style="background: white!important;">
                     <li>
-                        <form>
-<%--                            <div class="form-group">--%>
-<%--                                <label for="inputName">Name</label>--%>
-<%--                                <input type="text" class="form-control" id="inputName" placeholder="(*)">--%>
-<%--                            </div>--%>
-<%--                            <div class="form-group">--%>
-<%--                                <label for="inputPhone">Number Phone</label>--%>
-<%--                                <input type="text" class="form-control" id="inputPhone" placeholder="(*)">--%>
-<%--                            </div>--%>
 
-<%--                            <div class="form-group">--%>
-<%--                                <div class="form-check">--%>
-<%--                                    <input class="form-check-input" type="checkbox" id="gridCheck">--%>
-<%--                                    <label class="form-check-label" for="gridCheck">--%>
-<%--                                        Check me out--%>
-<%--                                    </label>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-                            <a href="/checkout"><button type="button" class="btn btn-primary">---->Checkout<-----</button>
-                            </a>
-                        </form>
                 </div>
 
 
@@ -287,7 +261,7 @@
 <footer class="page-footer font-small blue pt-4">
 
     <!-- Footer Links -->
-    <div class="container-fluid text-center text-md-left" style="background:#b8daff">
+    <div class="container-fluid text-center text-md-left">
 
         <div class="row">
 
@@ -301,8 +275,7 @@
                         <a>Số ĐKKD: 0107574310, ngày cấp: 23/09/2016. Nơi cấp: Sở Kế hoạch và đầu tư Hà Nội</a>
                     </li>
                     <li>
-                        <a>Địa chỉ liên hệ: Phòng 301 Tòa nhà GP Invest, 170 La Thành, P. Ô Chợ Dừa, Q. Đống Đa,
-                            Hà
+                        <a>Địa chỉ liên hệ: Phòng 301 Tòa nhà GP Invest, 170 La Thành, P. Ô Chợ Dừa, Q. Đống Đa, Hà
                             Nội</a>
                     </li>
                     <li>
@@ -328,15 +301,11 @@
                 <h5 class="text-uppercase">Products</h5>
 
                 <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">Áo</a>
-                    </li>
-                    <li>
-                        <a href="#!">Quần</a>
-                    </li>
-                    <li>
-                        <a href="#!">Sale</a>
-                    </li>
+                    <c:forEach items='${requestScope["categoryList"]}'
+                               var="category">
+                        <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                    </c:forEach>
+
 
                 </ul>
 
@@ -368,15 +337,16 @@
                 <ul class="list-unstyled">
                     <li>
                         <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                            <input  type="search" hidden name="action" value="search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                   name="search">
+                            <input type="search" hidden name="action" value="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
                     <li>
-                        <a href="#"> <img src="image/fb2.jfif" style="height: 50px"></a>
-                        <a href="#"> <img src="image/in.png" style="height: 50px"></a>
-                        <a href="#"> <img src="image/tw.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/Facebook_logo.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/twice.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/zalo-logo.png" style="height: 50px"></a>
                     </li>
 
                 </ul>
@@ -388,8 +358,12 @@
 
     </div>
 
+
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
     <div class="footer-copyright text-center py-3" style="color: #b8daff">© 2020 Copyright:
-        <a href="#"> TDT.vn</a>
+        <a href="#"> TDA.vn</a>
     </div>
 </footer>
 

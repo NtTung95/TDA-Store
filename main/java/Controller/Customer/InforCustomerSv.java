@@ -1,7 +1,9 @@
 package Controller.Customer;
 
+import DAO.ProductDAO;
 import DAO.customer.CustomerDAO;
 import DAO.order.HistoryOrderDAO;
+import Model.Category;
 import Model.Customer;
 import Model.HistoryOrders;
 
@@ -17,7 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(urlPatterns = {"/inforcustomer"})
-public class InforCustomer extends HttpServlet {
+public class InforCustomerSv extends HttpServlet {
 
     private CustomerDAO customerDAO = new CustomerDAO();
 
@@ -74,6 +76,8 @@ public class InforCustomer extends HttpServlet {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("loggedCustomer");
         request.setAttribute("customer", customer);
+        ArrayList<Category> categories = ProductDAO.loadCategory();
+        request.setAttribute("categoryList", categories);
         try {
             request.getRequestDispatcher("inforCustomer.jsp").forward(request, response);
         } catch (ServletException e) {

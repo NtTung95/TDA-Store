@@ -197,7 +197,7 @@
 <footer class="page-footer font-small blue pt-4">
 
     <!-- Footer Links -->
-    <div class="container-fluid text-center text-md-left" style="background:#b8daff">
+    <div class="container-fluid text-center text-md-left">
 
         <div class="row">
 
@@ -237,15 +237,11 @@
                 <h5 class="text-uppercase">Products</h5>
 
                 <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">Áo</a>
-                    </li>
-                    <li>
-                        <a href="#!">Quần</a>
-                    </li>
-                    <li>
-                        <a href="#!">Sale</a>
-                    </li>
+                    <c:forEach items='${requestScope["categoryList"]}'
+                               var="category">
+                        <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                    </c:forEach>
+
 
                 </ul>
 
@@ -277,16 +273,17 @@
                 <ul class="list-unstyled">
                     <li>
                         <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                            <input  type="search" hidden name="action" value="search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                   name="search">
+                            <input type="search" hidden name="action" value="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
-                    <l>
-                        <a href="#"> <img src="image/fb11.png" style="height: 50px"></a>
-                        <a href="#"> <img src="image/in.png" style="height: 50px"></a>
-                        <a href="#"> <img src="image/tw.png" style="height: 50px"></a>
-                    </l>
+                    <li>
+                        <a href="#"> <img src="image/Facebook_logo.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/twice.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/zalo-logo.png" style="height: 50px"></a>
+                    </li>
 
                 </ul>
 
@@ -302,7 +299,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3" style="color: #b8daff">© 2020 Copyright:
-        <a href="#"> TDT.vn</a>
+        <a href="#"> TDA.vn</a>
     </div>
 </footer>
 </body>

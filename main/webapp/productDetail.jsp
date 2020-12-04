@@ -1,4 +1,4 @@
-<%--
+<%@ page import="DAO.customer.CustomerDAO" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 02/12/2020
@@ -30,43 +30,61 @@
                         <a href="/products" class="nav-link dropbtn">Product</a>
                         <div class="dropdown-content">
                             <ul>
-                                <li>
-                                    <c:forEach items='${requestScope["categoryList"]}'
-                                               var="category">
-                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
-                                    </c:forEach>
+                                <c:forEach items='${requestScope["categoryList"]}'
+                                           var="category">
+                                    <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                                </c:forEach>
 
-                                    <%--                                    <a href="#">Shirt</a>--%>
-                                    <%--                                    <a href="#">Coat</a>--%>
-                                    <%--                                    <a href="#">Shorts</a>--%>
-                                    <%--                                    <a href="#">Jeans</a>--%>
-                                    <%--                                    <a href="#">Pants</a>--%>
 
-                                </li>
-                                <li>
-                                    <img src="image/male.jpg"
-                                         style="height: 400px ;position:absolute;top: 0px;left: 450px">
-                                </li>
+
+                                <img src="image/male.jpg"
+                                     style="height: 400px ;position:absolute;top: 0px;left: 450px">
+
                             </ul>
                         </div>
                     </div>
                 </li>
+                <%
+                    String displayManagement;
+                    if (session.getAttribute("nullCustomer") == null) {
+                        displayManagement = "none";
+                    } else {
+                        if ((int) session.getAttribute("typeOfId") == CustomerDAO.CHECK_ADMIN) {
+                            displayManagement = "block";
+                        } else {
+                            displayManagement = "none";
+                        }
+                    }
+                %>
 
+                <li class="nav-item" style="display:<%=displayManagement%>">
+                    <div class="dropdown">
+                        <a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="height: auto; width: auto">
+                            <a class="dropdown-item" href="/admin/customer">User Management
+                            </a>
+                            <a class="dropdown-item" href="/admin/product">Product Management
+                            </a>
+                        </div>
+                    </div>
+                </li>
 
-                <a class="navbar-brand" href="#" style="position:absolute ; left:635px "><img src="image/images.png"
-                                                                                              style="height: 40px"></a>
+                <a class="navbar-brand" href="/homepage" style="position:absolute ; left:600px "><img src="image/Logo-TDA.png" style="height: 40px"></a>
             </ul>
         </div>
         <div>
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                        <input  type="search" hidden name="action" value="search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                               name="search">
+                        <input type="search" hidden name="action" value="search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </li>
-                <li class="nav-item active"><a class="nav-link" href="#">
+                <li class="nav-item active"><a class="nav-link" href="/cart">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-check-fill" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -82,12 +100,12 @@
                     String urlMenu2 = "/register";
                     if (nameResult == null) {
                         nameResult = "Login";
-                    }else {
+                    } else {
                         url = "#";
                         menu1 = "profile";
-                        urlMenu1="/inforcustomer";
-                        menu2="logout";
-                        urlMenu2= "/logout";
+                        urlMenu1 = "/inforcustomer";
+                        menu2 = "logout";
+                        urlMenu2 = "/logout";
                     }
                 %>
                 <li class="nav-item active">
@@ -102,8 +120,10 @@
                         </a>
 
                         <div class="dropdown-content" style="height: auto; width: auto">
-                            <a href="<%=urlMenu1%>"><%=menu1%></a>
-                            <a href="<%=urlMenu2%>"><%=menu2%></a>
+                            <a href="<%=urlMenu1%>"><%=menu1%>
+                            </a>
+                            <a href="<%=urlMenu2%>"><%=menu2%>
+                            </a>
                             <%--                            <a href="#">Link 3</a>--%>
 
                         </div>
@@ -228,7 +248,7 @@
 <footer class="page-footer font-small blue pt-4">
 
     <!-- Footer Links -->
-    <div class="container-fluid text-center text-md-left" style="background:#b8daff">
+    <div class="container-fluid text-center text-md-left">
 
         <div class="row">
 
@@ -242,8 +262,7 @@
                         <a>Số ĐKKD: 0107574310, ngày cấp: 23/09/2016. Nơi cấp: Sở Kế hoạch và đầu tư Hà Nội</a>
                     </li>
                     <li>
-                        <a>Địa chỉ liên hệ: Phòng 301 Tòa nhà GP Invest, 170 La Thành, P. Ô Chợ Dừa, Q. Đống Đa,
-                            Hà
+                        <a>Địa chỉ liên hệ: Phòng 301 Tòa nhà GP Invest, 170 La Thành, P. Ô Chợ Dừa, Q. Đống Đa, Hà
                             Nội</a>
                     </li>
                     <li>
@@ -269,15 +288,11 @@
                 <h5 class="text-uppercase">Products</h5>
 
                 <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">Áo</a>
-                    </li>
-                    <li>
-                        <a href="#!">Quần</a>
-                    </li>
-                    <li>
-                        <a href="#!">Sale</a>
-                    </li>
+                    <c:forEach items='${requestScope["categoryList"]}'
+                               var="category">
+                        <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                    </c:forEach>
+
 
                 </ul>
 
@@ -309,15 +324,16 @@
                 <ul class="list-unstyled">
                     <li>
                         <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                            <input  type="search" hidden name="action" value="search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                                   name="search">
+                            <input type="search" hidden name="action" value="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
                     <li>
-                        <a href="#"> <img src="image/fb2.jfif" style="height: 50px"></a>
-                        <a href="#"> <img src="image/in.png" style="height: 50px"></a>
-                        <a href="#"> <img src="image/tw.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/Facebook_logo.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/twice.png" style="height: 50px"></a>
+                        <a href="#"> <img src="image/zalo-logo.png" style="height: 50px"></a>
                     </li>
 
                 </ul>
@@ -329,8 +345,12 @@
 
     </div>
 
+
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
     <div class="footer-copyright text-center py-3" style="color: #b8daff">© 2020 Copyright:
-        <a href="#"> TDT.vn</a>
+        <a href="#"> TDA.vn</a>
     </div>
 </footer>
 
