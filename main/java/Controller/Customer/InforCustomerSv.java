@@ -37,11 +37,11 @@ public class InforCustomerSv extends HttpServlet {
 
         String action = request.getParameter("action");
         if (action == null) {
-            readInfor(request,response);
+            readInfor(request, response);
         } else {
             switch (action) {
                 case "oder":
-                  readHistoryOrder(request,response);
+                    readHistoryOrder(request, response);
                     break;
                 case "infor":
                     readInfor(request, response);
@@ -71,27 +71,34 @@ public class InforCustomerSv extends HttpServlet {
 
     }
 
-    public void readInfor(HttpServletRequest request, HttpServletResponse response) {
+    public void readInfor(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("loggedCustomer");
-        request.setAttribute("customer", customer);
-        ArrayList<Category> categories = ProductDAO.loadCategory();
-        request.setAttribute("categoryList", categories);
-        try {
-            request.getRequestDispatcher("inforCustomer.jsp").forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String userName = (String) session.getAttribute("nameLogin");
+        if (session.getAttribute("nullCustomer") == null) {
+            response.sendRedirect("/login");
+        } else {
+            if (userName.equals(customer.getUsername())) {
+
+                request.setAttribute("customer", customer);
+                ArrayList<Category> categories = ProductDAO.loadCategory();
+                request.setAttribute("categoryList", categories);
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("inforCustomer.jsp");
+                requestDispatcher.forward(request, response);
+            } else {
+                response.sendRedirect("/error.jsp");
+            }
         }
     }
+
     public void readHistoryOrder(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("loggedCustomer");
         int idCustomer = customer.getCustomerID();
         HistoryOrderDAO historyOrderDAO = new HistoryOrderDAO();
         ArrayList<Order> orderDetailResults = OrdersDAO.getOrdersInDbById(idCustomer);
-        request.setAttribute("historyOrder",orderDetailResults);
+        request.setAttribute("historyOrder", orderDetailResults);
         try {
             request.getRequestDispatcher("odrerHistory.jsp").forward(request, response);
         } catch (ServletException e) {
