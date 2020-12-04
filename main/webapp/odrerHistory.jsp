@@ -1,7 +1,3 @@
-<%@ page import="Model.Customer" %>
-<%@ page import="DAO.order.HistoryOrderDAO" %>
-<%@ page import="Model.HistoryOrders" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="DAO.customer.CustomerDAO" %><%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -19,6 +15,9 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -37,9 +36,10 @@
                             <ul>
                                 <c:forEach items='${requestScope["categoryList"]}'
                                            var="category">
-                                    <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                                    <li>
+                                        <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                                    </li>
                                 </c:forEach>
-
 
 
                                 <img src="image/male.jpg"
@@ -76,7 +76,8 @@
                     </div>
                 </li>
 
-                <a class="navbar-brand" href="/homepage" style="position:absolute ; left:600px "><img src="image/Logo-TDA.png" style="height: 40px"></a>
+                <a class="navbar-brand" href="/homepage" style="position:absolute ; left:600px "><img
+                        src="image/Logo-TDA.png" style="height: 40px"></a>
             </ul>
         </div>
         <div>
@@ -206,7 +207,7 @@
                     <div>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="/inforcustomer?action=infor" >Account information</a>
+                                <a href="/inforcustomer?action=infor">Account information</a>
                             </li>
                             <li>
                                 <a href="/inforcustomer?action=oder">Oder Management</a>
@@ -218,26 +219,34 @@
             </div>
 
         </div>
-        <div class="col-lg-6" >
+        <div class="col-lg-6">
             <div>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">OrderID</th>
                         <th scope="col">Date Pay</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Pay</th>
+                        <th scope="col">status</th>
+                        <th scope="col">detail</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="order" items="${historyOrder}">
                         <tr>
-                            <td><c:out value="${order.getIdOrder()}"/></td>
+
+                            <td><c:out value="${order.getOrderId()}"/></td>
                             <td><c:out value="${order.getDateOrdered()}"/></td>
-                            <td><c:out value="${order.getProductName()}"/></td>
-                            <td><c:out value="${order.getPrice()}"/></td>
+                            <td><c:out value="${order.getStatus()}"/></td>
+                            <td><input type="button" class="btn btn-primary" id="myButton${order.getOrderId()}" value="Detail"></td>
                         </tr>
+                        <script>
+                            $('#myButton${order.getOrderId()}').click(function () {
+                                window.open("/orderdetail?orderid=${order.getOrderId()}", "_blank",
+                                    "toolbar,scrollbars,resizable,top=500,left=500,width=800,height=auto");
+                            });
+                        </script>
                     </c:forEach>
+
                     </tbody>
                 </table>
             </div>
@@ -297,7 +306,8 @@
                 <ul class="list-unstyled">
                     <c:forEach items='${requestScope["categoryList"]}'
                                var="category">
-                        <li> <a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>  </li>
+                        <li><a href="/products?category=${category.getCategoryId()}">${category.getNameCategory()}</a>
+                        </li>
                     </c:forEach>
 
 
@@ -372,4 +382,5 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
 </body>
-</html>>
+</html>
+>

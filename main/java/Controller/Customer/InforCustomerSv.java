@@ -3,9 +3,8 @@ package Controller.Customer;
 import DAO.ProductDAO;
 import DAO.customer.CustomerDAO;
 import DAO.order.HistoryOrderDAO;
-import Model.Category;
-import Model.Customer;
-import Model.HistoryOrders;
+import DAO.order.OrdersDAO;
+import Model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -91,8 +90,8 @@ public class InforCustomerSv extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("loggedCustomer");
         int id = customer.getCustomerID();
         HistoryOrderDAO historyOrderDAO = new HistoryOrderDAO();
-        ArrayList<HistoryOrders> list = historyOrderDAO.selectAllOrder(id);
-        request.setAttribute("historyOrder",list);
+        ArrayList<Order> orderDetailResults = OrdersDAO.getOrdersInDb();
+        request.setAttribute("historyOrder",orderDetailResults);
         try {
             request.getRequestDispatcher("odrerHistory.jsp").forward(request, response);
         } catch (ServletException e) {
